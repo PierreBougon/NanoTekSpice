@@ -39,4 +39,4 @@ namespace nts
 }
 
 
-#endif //NANOTEKSPICE_ICOMPONENT_H_
+#endif // !NANOTEKSPICE_ICOMPONENT_H_

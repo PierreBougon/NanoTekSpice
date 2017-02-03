@@ -44,4 +44,4 @@ namespace nts
 }
 
 
-#endif //NANOTEKSPICE_IPARSER_H_
+#endif // !NANOTEKSPICE_IPARSER_H_
