@@ -3,8 +3,15 @@
 //
 
 #include <iostream>
+#include <Logger.h>
 
-int main()
+int main(int ac, char **av)
 {
+    Debug::DEBUG_MODE = true;
+    if (ac < 2)
+    {
+        std::cerr << ""
+    }
+    nts::
     std::cout << "POC IL FAUT TRAVAILLER" << std::endl;
 }
