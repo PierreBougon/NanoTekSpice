@@ -2,13 +2,50 @@
 // Created by Pierre Bougon on 03/02/17.
 //
 
+#include <Logger.h>
 #include "components/ComponentCreator.h"
 
-nts::IComponent *
-nts::ComponentCreator::createComponent(const std::string &type, const std::string &value)
+nts::ComponentCreator::ComponentCreator()
+{
+    creationTab["2716"] = &ComponentCreator::create2716;
+    creationTab["4001"] = &ComponentCreator::create4001;
+    creationTab["4008"] = &ComponentCreator::create4008;
+    creationTab["4011"] = &ComponentCreator::create4011;
+    creationTab["4013"] = &ComponentCreator::create4013;
+    creationTab["4017"] = &ComponentCreator::create4017;
+    creationTab["4030"] = &ComponentCreator::create4030;
+    creationTab["4040"] = &ComponentCreator::create4040;
+    creationTab["4069"] = &ComponentCreator::create4069;
+    creationTab["4071"] = &ComponentCreator::create4071;
+    creationTab["4081"] = &ComponentCreator::create4081;
+    creationTab["4094"] = &ComponentCreator::create4094;
+    creationTab["4503"] = &ComponentCreator::create4503;
+    creationTab["4512"] = &ComponentCreator::create4512;
+    creationTab["4514"] = &ComponentCreator::create4514;
+    creationTab["i4004"] = &ComponentCreator::createi4004;
+    creationTab["mk4801"] = &ComponentCreator::createmk4801;
+}
+
+nts::IComponent *nts::ComponentCreator::createComponent(const std::string &type,
+                                                        const std::string &value) const
+{
+    if (creationTab.find(type) == creationTab.end())
+    {
+        Logger::log(Logger::Warning, "ComponentCreator: Cannot create a component of "
+                                             "type " + type);
+        return (nullptr);
+    }
+    return (IComponent *) ((*this).*creationTab.at(type))(value);
+}
+
+/*
+nts::IComponent *nts::ComponentCreator::createComponent(const std::string &type,
+                                                        const std::string &value)
 {
     switch (std::stoi(type))
     {
+*/
+/*
         case 2716:
             return create2716(value);
         case 4001:
@@ -43,10 +80,13 @@ nts::ComponentCreator::createComponent(const std::string &type, const std::strin
             return createi4004(value);
         case 4801:
             return createmk4801(value);
+*//*
+
         default:
             return nullptr;
     }
 }
+*/
 
 nts::IComponent *nts::ComponentCreator::create2716(const std::string &value) const
 {
