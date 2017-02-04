@@ -10,7 +10,7 @@
 
 namespace Debug
 {
-    extern static bool DEBUG_MODE;
+    extern bool DEBUG_MODE;
 }
 
 class Logger
@@ -25,7 +25,7 @@ public:
         Error,
     };
 
-    static void log(Level lvl, std::string msg);
+    static void log(Level lvl, std::string msg, bool abort = false);
 };
 
 
