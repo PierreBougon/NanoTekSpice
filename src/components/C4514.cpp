@@ -3,3 +3,6 @@
 //
 
 #include "components/C4514.h"
+
+nts::Component::C4514::C4514(const std::string &name) : AComponent(name)
+{}

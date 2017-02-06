@@ -3,3 +3,6 @@
 //
 
 #include "components/C4081.h"
+
+nts::Component::C4081::C4081(const std::string &name) : AComponent(name)
+{}

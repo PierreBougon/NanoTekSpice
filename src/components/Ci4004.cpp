@@ -3,3 +3,6 @@
 //
 
 #include "components/Ci4004.h"
+
+nts::Component::Ci4004::Ci4004(const std::string &name) : AComponent(name)
+{}

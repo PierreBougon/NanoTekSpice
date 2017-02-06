@@ -5,13 +5,16 @@
 #ifndef NANOTEKSPICE_CMK4801_H_
 #define NANOTEKSPICE_CMK4801_H_
 
+#include "AComponent.h"
+
 namespace nts
 {
     namespace Component
     {
-        class Cmk4801
+        class Cmk4801 : public AComponent
         {
-
+        public:
+            Cmk4801(const std::string &name);
         };
     }
 }

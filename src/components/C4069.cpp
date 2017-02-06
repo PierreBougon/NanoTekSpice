@@ -3,3 +3,6 @@
 //
 
 #include "components/C4069.h"
+
+nts::Component::C4069::C4069(const std::string &name) : AComponent(name)
+{}

@@ -5,13 +5,16 @@
 #ifndef NANOTEKSPICE_C4001_H_
 #define NANOTEKSPICE_C4001_H_
 
+#include "AComponent.h"
+
 namespace nts
 {
     namespace Component
     {
-        class C4001
+        class C4001 : public AComponent
         {
-
+        public:
+            C4001(const std::string &name);
         };
     }
 }

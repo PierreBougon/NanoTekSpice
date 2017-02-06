@@ -3,3 +3,6 @@
 //
 
 #include "components/C4503.h"
+
+nts::Component::C4503::C4503(const std::string &name) : AComponent(name)
+{}
