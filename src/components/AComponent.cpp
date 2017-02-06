@@ -6,12 +6,10 @@
 
 nts::Component::AComponent::AComponent() : name("UnnamedComponent")
 {
-
 }
 
 nts::Component::AComponent::AComponent(const std::string &name) : name(name)
 {
-
 }
 
 nts::Component::AComponent::~AComponent()
