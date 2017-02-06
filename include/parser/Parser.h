@@ -17,7 +17,7 @@ namespace nts {
 		virtual t_ast_node  *createTree();
 
 	protected:
-		t_ast_node  *root;
+		t_ast_node  *_root;
 
 	};
 }
