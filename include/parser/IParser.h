@@ -1,15 +1,14 @@
 //
-
 // Created by Pierre Bougon on 02/02/17.
 //
 
 #ifndef NANOTEKSPICE_IPARSER_H_
-#define NANOTEKSPICE_IPARSER_H_
+# define NANOTEKSPICE_IPARSER_H_
 
 
-#include <zconf.h>
-#include <vector>
-#include <string>
+# include <zconf.h>
+# include <vector>
+# include <string>
 
 namespace nts
 {
