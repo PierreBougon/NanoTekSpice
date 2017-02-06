@@ -26,8 +26,6 @@ namespace nts
 
         IComponent *createComponent(const std::string &type,
                                     const std::string &value) const;
-/*        static IComponent *createComponent(const std::string &type,
-                                           const std::string &value);*/
 
     private:
         IComponent *create2716(const std::string &value) const;
