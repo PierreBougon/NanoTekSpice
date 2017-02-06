@@ -5,11 +5,15 @@
 #ifndef NANOTEKSPICE_C4512_H_
 #define NANOTEKSPICE_C4512_H_
 
-
-class C4512
+namespace nts
 {
+    namespace Component
+    {
+        class C4512
+        {
 
-};
-
+        };
+    }
+}
 
 #endif // !NANOTEKSPICE_C4512_H_

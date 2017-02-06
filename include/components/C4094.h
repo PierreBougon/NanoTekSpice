@@ -5,11 +5,15 @@
 #ifndef NANOTEKSPICE_C4094_H_
 #define NANOTEKSPICE_C4094_H_
 
-
-class C4094
+namespace nts
 {
+    namespace Component
+    {
+        class C4094
+        {
 
-};
-
+        };
+    }
+}
 
 #endif // !NANOTEKSPICE_C4094_H_

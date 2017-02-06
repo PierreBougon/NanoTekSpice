@@ -5,11 +5,15 @@
 #ifndef NANOTEKSPICE_C4503_H_
 #define NANOTEKSPICE_C4503_H_
 
-
-class C4503
+namespace nts
 {
+    namespace Component
+    {
+        class C4503
+        {
 
-};
-
+        };
+    }
+}
 
 #endif // !NANOTEKSPICE_C4503_H_

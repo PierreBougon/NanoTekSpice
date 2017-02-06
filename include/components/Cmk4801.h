@@ -5,11 +5,15 @@
 #ifndef NANOTEKSPICE_CMK4801_H_
 #define NANOTEKSPICE_CMK4801_H_
 
-
-class Cmk4801
+namespace nts
 {
+    namespace Component
+    {
+        class Cmk4801
+        {
 
-};
-
+        };
+    }
+}
 
 #endif // !NANOTEKSPICE_CMK4801_H_
