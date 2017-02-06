@@ -5,7 +5,7 @@
 #include <iostream>
 #include "Logger.h"
 
-bool Debug::DEBUG_MODE;
+bool Debug::DEBUG_MODE = false;
 
 void Logger::log(Logger::Level lvl, std::string msg, bool abort)
 {
