@@ -12,8 +12,10 @@ class FileHandler {
 	FileHandler(std::string const file);
 	~FileHandler();
 
+	std::string trim(const std::string str);
 	std::string getValidLine();
 	std::string epur(std::string);
+	bool bothAreSpace(char lhs, char rhs);
 	bool isLineValid(std::string line);
 
 private:
