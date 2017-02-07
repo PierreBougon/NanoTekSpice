@@ -25,3 +25,19 @@ void nts::Component::AComponent::setName(const std::string &name)
 {
     AComponent::name = name;
 }
+
+nts::Tristate nts::Component::AComponent::Compute(size_t pin_num_this)
+{
+    return nullptr;
+}
+
+void nts::Component::AComponent::SetLink(size_t pin_num_this, nts::IComponent &component,
+                                         size_t pin_num_target)
+{
+
+}
+
+void nts::Component::AComponent::Dump(void) const
+{
+
+}

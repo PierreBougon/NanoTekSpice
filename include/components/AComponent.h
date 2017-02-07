@@ -6,7 +6,9 @@
 #define NANOTEKSPICE_ACOMPONENT_H_
 
 #include <string>
+#include <vector>
 #include "IComponent.h"
+#include "APin.h"
 
 namespace nts
 {
@@ -15,7 +17,14 @@ namespace nts
         class AComponent : public IComponent
         {
         protected:
-            std::string name;
+            /*________________________
+             * ## Class attributes ##
+             * ----------------------*/
+            std::string         name;
+            std::vector<APin>   pinList;
+            int                 nbPin;
+
+
         public:
             AComponent();
             AComponent(const std::string &name);
@@ -23,6 +32,13 @@ namespace nts
 
         private:
         public:
+            Tristate Compute(size_t pin_num_this) override;
+
+            void SetLink(size_t pin_num_this, nts::IComponent &component,
+                         size_t pin_num_target) override;
+
+            void Dump(void) const override;
+
             const std::string &getName() const;
 
             void setName(const std::string &name);
