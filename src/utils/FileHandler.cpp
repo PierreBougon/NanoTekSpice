@@ -6,24 +6,30 @@
 #include "Logger.h"
 #include "utils/FileHandler.h"
 
-FileHandler::FileHandler(const std::string file) {
-	_openedFile.open(file);
+nts::Utils::FileHandler::FileHandler() {
+	_fileName = "";
+}
 
-	if (_openedFile.bad()) {
-		Logger::log(Logger::Error, "The file cannot be opened, check its name", true);
+void nts::Utils::FileHandler::OpenFile() {
+	if (_fileName.empty()) {
+		Logger::log(Logger::Error, "The file name wasn't set before using OpenFile()\n", true);
+	}
+	_openedFile.open(_fileName, std::ios::in);
+	if (!_openedFile.good()) {
+		Logger::log(Logger::Error, "The file cannot be opened, check its name\n", true);
 	}
 }
 
-FileHandler::~FileHandler() {
+nts::Utils::FileHandler::FileHandler(const std::string file) {
+	_fileName = file;
+}
+
+nts::Utils::FileHandler::~FileHandler() {
 	if (_openedFile.is_open())
 		_openedFile.close();
 }
 
-bool FileHandler::bothAreSpace(char lhs, char rhs) {
-	return (lhs == rhs) && (lhs == ' ');
-}
-
-std::string FileHandler::trim(const std::string str) {
+std::string nts::Utils::FileHandler::trim(const std::string str) {
 	size_t first = str.find_first_not_of(' ');
 
 	if (std::string::npos == first)
@@ -33,28 +39,39 @@ std::string FileHandler::trim(const std::string str) {
 	return (str.substr(first, (last - first + 1)));
 }
 
-std::string FileHandler::epur(std::string line) {
+std::string nts::Utils::FileHandler::epur(std::string line) {
 	std::string cleanedLine = line;
 
 	std::replace(cleanedLine.begin(), cleanedLine.end(), '\t', ' ');
-	std::string::iterator new_end = std::unique(cleanedLine.begin(), cleanedLine.end(), bothAreSpace);
+	std::string::iterator new_end = std::unique(cleanedLine.begin(), cleanedLine.end(),
+	                                            [=](char lhs, char rhs){return (lhs == rhs) && (lhs == ' ');}
+												);
 	cleanedLine.erase(new_end, cleanedLine.end());
 	cleanedLine = trim(line);
 
 	return (cleanedLine);
 }
 
-bool FileHandler::isLineValid(std::string line) {
-	if (line.empty())
+bool nts::Utils::FileHandler::isLineValid(std::string line) {
+	if (line.empty() || line.at(0) == '#')
 		return (false);
 	return (true);
 }
 
-std::string FileHandler::getValidLine() {
+std::string nts::Utils::FileHandler::getValidLine() {
 	std::string line;
 
-	getline(_openedFile, line);
-
+	if (!_openedFile.good())
+		return ("");
+	if (getline(_openedFile, line))
+	line = epur(line);
+	if (!isLineValid(line))
+		line = getValidLine();
 	return (line);
 }
 
+void nts::Utils::FileHandler::setFileName(std::string name) {
+	_fileName = name;
+	printf("filename = |%s|\n", _fileName.c_str());
+	OpenFile();
+}
