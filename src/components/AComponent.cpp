@@ -28,7 +28,7 @@ void nts::Component::AComponent::setName(const std::string &name)
 
 nts::Tristate nts::Component::AComponent::Compute(size_t pin_num_this)
 {
-    return nullptr;
+    return nts::Tristate::UNDEFINED;
 }
 
 void nts::Component::AComponent::SetLink(size_t pin_num_this, nts::IComponent &component,

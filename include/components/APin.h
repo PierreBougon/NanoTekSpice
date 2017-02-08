@@ -30,7 +30,7 @@ namespace nts
 
             virtual ~APin();
 
-            virtual nts::Tristate compute() = 0;
+//            virtual nts::Tristate compute() = 0;
 
             PinType getType() const;
 

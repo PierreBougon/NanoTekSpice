@@ -18,9 +18,9 @@ namespace nts
         private:
             InputPin inputPin1;
             InputPin inputPin2;
-            std::vector<APin const &> linkedPin;
+//            std::vector<APin const &> linkedPin;
         public:
-            Tristate compute() override;
+//            Tristate compute() override;
         };
     }
 }

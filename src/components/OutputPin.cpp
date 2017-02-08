@@ -4,7 +4,8 @@
 
 #include "components/OutputPin.h"
 
-nts::Tristate nts::Component::OutputPin::compute()
+/*nts::Tristate nts::Component::OutputPin::compute()
 {
-    return nullptr;
+    return nts::Tristate::UNDEFINED;
 }
+*/

@@ -7,7 +7,7 @@
 nts::Tristate nts::Component::InputPin::getState() const
 {
     if (inputPin)
-        return inputPin->value;
+        return inputPin->getValue();
     return nts::Tristate::UNDEFINED;
 }
 
