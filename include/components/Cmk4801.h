@@ -15,6 +15,9 @@ namespace nts
         {
         public:
             Cmk4801(const std::string &name);
+
+            Tristate gate(nts::Component::InputPin const *inputPin1,
+                          nts::Component::InputPin const *inputPin2) const override;
         };
     }
 }

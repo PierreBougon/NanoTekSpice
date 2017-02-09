@@ -6,3 +6,9 @@
 
 nts::Component::Cmk4801::Cmk4801(const std::string &name) : AComponent(name)
 {}
+
+nts::Tristate nts::Component::Cmk4801::gate(nts::Component::InputPin const *inputPin1,
+                                            nts::Component::InputPin const *inputPin2) const
+{
+    return UNDEFINED;
+}

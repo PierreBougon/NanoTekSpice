@@ -6,3 +6,9 @@
 
 nts::Component::C4013::C4013(const std::string &name) : AComponent(name)
 {}
+
+nts::Tristate nts::Component::C4013::gate(nts::Component::InputPin const *inputPin1,
+                                          nts::Component::InputPin const *inputPin2) const
+{
+    return UNDEFINED;
+}
