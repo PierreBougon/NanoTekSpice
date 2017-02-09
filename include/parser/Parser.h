@@ -18,6 +18,10 @@ namespace nts {
 	protected:
 		t_ast_node  *_root;
 
+		void feedChipsets(const std::string &input);
+		void feedLinks(const std::string &input);
+		bool checkIfKeywordOrComponent(std::string toBeChecked);
+		void *getNode(ASTNodeType type, std::string string, std::vector<s_ast_node *> *actualLeaf);
 	};
 }
 

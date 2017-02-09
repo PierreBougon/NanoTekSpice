@@ -17,7 +17,10 @@ void nts::Lexer::getFileNameAndOpenFile(char **av, nts::Utils::FileHandler &file
 }
 
 void nts::Lexer::readFileAndBuildTree(nts::Utils::FileHandler &fileHandler, nts::Parser &parser) {
-	for(std::string line = fileHandler.getValidLine(); line != ""; line = fileHandler.getValidLine())
+	for(std::string line = fileHandler.getValidLine(); line != ""; line = fileHandler.getValidLine()) {
+		parser.feed(line);
+	}
+
 }
 
 void nts::Lexer::readFileAndArguments(char **av, nts::Parser &parser) {
