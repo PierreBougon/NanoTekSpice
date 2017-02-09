@@ -3,7 +3,7 @@
 //
 
 #include <algorithm>
-#include "Logger.h"
+#include "utils/Logger.h"
 #include "utils/FileHandler.h"
 
 FileHandler::FileHandler(const std::string file) {
