@@ -8,18 +8,24 @@
 #include <string>
 #include <fstream>
 
-class FileHandler {
-	FileHandler(std::string const file);
-	~FileHandler();
-
-	std::string trim(const std::string str);
-	std::string getValidLine();
-	std::string epur(std::string);
-	bool bothAreSpace(char lhs, char rhs);
-	bool isLineValid(std::string line);
-
-private:
-	std::ifstream   _openedFile;
-};
+namespace nts {
+	namespace Utils {
+		class FileHandler {
+		public:
+			FileHandler(std::string const file);
+			FileHandler();
+			~FileHandler();
+			std::string trim(const std::string str);
+			std::string getValidLine();
+			std::string epur(std::string);
+			bool isLineValid(std::string line);
+			void OpenFile();
+			void setFileName(std::string name);
+		private:
+			std::string _fileName;
+			std::ifstream _openedFile;
+		};
+	}
+}
 
 #endif //NANOTEKSPICE_FILEHANDLER_H

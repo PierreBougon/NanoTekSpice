@@ -15,7 +15,6 @@ namespace nts {
 		virtual void        feed(std::string const &input);
 		virtual void        parseTree(t_ast_node &root);
 		virtual t_ast_node  *createTree();
-
 	protected:
 		t_ast_node  *_root;
 

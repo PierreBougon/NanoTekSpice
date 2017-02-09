@@ -5,7 +5,6 @@
 #ifndef NANOTEKSPICE_APIN_H_
 #define NANOTEKSPICE_APIN_H_
 
-
 #include "IComponent.h"
 
 namespace nts
