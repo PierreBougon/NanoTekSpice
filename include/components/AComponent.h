@@ -26,11 +26,10 @@ namespace nts
 
 
         public:
-            AComponent();
+            AComponent() = delete;
             AComponent(const std::string &name);
             virtual ~AComponent();
 
-        private:
         public:
             Tristate Compute(size_t pin_num_this) override;
 
@@ -42,6 +41,11 @@ namespace nts
             const std::string &getName() const;
 
             void setName(const std::string &name);
+
+            APin const *getPinAt(size_t pin_num_this) const;
+
+        private:
+            APin *_getPinAt(size_t pin_num_this);
         };
     }
 }
