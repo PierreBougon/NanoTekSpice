@@ -15,31 +15,6 @@ nts::Parser::Parser() {
 nts::Parser::~Parser() {
 }
 
-void nts::Parser::feed(std::string const &input) {
-	std::string copy = input;
-	static int state = 0;
-
-	if (input == ".chipsets:" || input == ".links:") {
-		state = (input == ".chipsets:" ? 1 : 2);
-
-		nts::t_ast_node *chipsetNode = new nts::t_ast_node(nullptr);
-		chipsetNode->type = nts::ASTNodeType::SECTION;
-		chipsetNode->lexme = input;
-		chipsetNode->value = "";
-		chipsetNode->children = nullptr;
-		_root->children->push_back(chipsetNode);
-		return;
-	}
-	if (state == 0) {
-		Logger::log(Logger::Level::Error, ".links is before .chipset in the configuration file\n", true);
-	}
-	if (state == 1) {
-		feedChipsets(input);
-	} else if (state == 2) {
-		feedLinks(input);
-	}
-}
-
 //TODO: Check avec la liste des noms des components;
 bool nts::Parser::checkIfKeywordOrComponent(std::string toBeChecked) {
 	return (toBeChecked == "input" || toBeChecked == "output");
@@ -50,41 +25,74 @@ void *nts::Parser::getNode(nts::ASTNodeType type, std::string string, std::vecto
 
 	if (!root)
 		return (nullptr);
-	for(std::vector<s_ast_node *>::iterator it = root->begin();it < root->end(); it++) {
-		node = (t_ast_node *) getNode(type, string, (*it)->children);
-		printf("Tested values : %d\n%s\n Normal Values : %d\n%s\n", (*it)->type, (*it)->lexme.c_str(), type, string.c_str());
+	for(std::vector<s_ast_node *>::iterator it = root->begin(); it < root->end(); it++) {
+		if ((node = (t_ast_node *) getNode(type, string, (*it)->children)))
+			break;
 		if ((*it)->type == type && (*it)->lexme == string) {
-			printf("FOUND\n");
 			return (*it);
 		}
-		if (node)
-			break;
 	}
 	return (node);
 }
 
-void nts::Parser::feedChipsets(const std::string &input) {
+void nts::Parser::checkChipset() {
+	t_ast_node	*node;
+
+	node = (t_ast_node*)getNode(nts::ASTNodeType::SECTION, ".chipsets:", _root->children);
+	for (auto it = node->children->begin(); it < node->children->end(); it++) {
+		printf("%s %s\n", (*it)->lexme.c_str(), (*it)->value.c_str());
+	}
+}
+
+void nts::Parser::createAndPushANewNode(nts::ASTNodeType section, std::string lexme, std::string value, nts::ASTNodeType sectionTarget, std::string lexmeTarget) {
+	t_ast_node	*node;
 	t_ast_node *newNode = createTree();
+
+	newNode->type = section;
+	newNode->lexme = lexme;
+	newNode->value = value;
+	node = (t_ast_node*)getNode(sectionTarget, lexmeTarget, _root->children);
+	node->children->push_back(newNode);
+}
+void nts::Parser::addLinkNode(std::string word1, std::string word2) {
+
+}
+
+void nts::Parser::addChipsetNode(std::string word1, std::string word2) {
+	createAndPushANewNode(nts::ASTNodeType::COMPONENT, word1, word2, nts::ASTNodeType::SECTION, ".chipsets:");
+}
+
+void nts::Parser::getWords(const std::string &input, int state) {
 	std::string word1, word2, copy;
 	std::stringstream stringstream;
 
 	copy = input;
 	stringstream.str(copy.c_str());
-	printf("stringstream.str = %s\n", stringstream.str().c_str());
-	copy = input;
 	stringstream >> word1 >> word2;
-	printf("values = |%s| |%s|\n", word1.c_str(), word2.c_str());
-	if (!checkIfKeywordOrComponent(word1)) {
-		Logger::log(Logger::Error, "On line : " + copy + " first word is neither a component or a keyword\n", true);
-	}
-	newNode->type = nts::ASTNodeType::COMPONENT;
-	newNode->lexme = word1;
-	newNode->value = word2;
-	getNode(nts::ASTNodeType::SECTION, ".chipsets:", _root->children);
-	exit(1);
+	if (state == 1)
+		addChipsetNode(word1, word2);
+	else
+		addLinkNode(word1, word2);
 }
-void nts::Parser::feedLinks(const std::string &input) {
-	printf("links = %s\n", input.c_str());
+
+void nts::Parser::feed(std::string const &input) {
+	std::string copy = input;
+	static int state = 0;
+
+	if (input == ".chipsets:" || (input == ".links:" && state == 1)) {
+		state = (input == ".chipsets:" ? 1 : 2);
+
+		nts::t_ast_node *chipsetNode = createTree();
+		chipsetNode->type = nts::ASTNodeType::SECTION;
+		chipsetNode->lexme = input;
+		chipsetNode->value = "";
+		_root->children->push_back(chipsetNode);
+		return;
+	}
+	if (state == 0) {
+		Logger::log(Logger::Level::Error, ".chipsets: must be the first non-comment line in the configuration file\n", true);
+	}
+	getWords(input, state);
 }
 
 void nts::Parser::parseTree(nts::t_ast_node &root) {}
