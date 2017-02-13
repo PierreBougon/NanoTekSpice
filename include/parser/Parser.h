@@ -16,6 +16,7 @@ namespace nts {
 		virtual void        parseTree(t_ast_node &root);
 		virtual t_ast_node  *createTree();
 		void checkChipset();
+		void checkLinks();
 	protected:
 		t_ast_node  *_root;
 

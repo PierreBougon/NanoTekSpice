@@ -35,12 +35,23 @@ void *nts::Parser::getNode(nts::ASTNodeType type, std::string string, std::vecto
 	return (node);
 }
 
+void nts::Parser::checkLinks() {
+	t_ast_node	*node;
+
+	node = (t_ast_node*)getNode(nts::ASTNodeType::SECTION, ".links:", _root->children);
+	for (auto it = node->children->begin(); it < node->children->end(); it++) {
+		printf("%s:%s\t", (*it)->lexme.c_str(), (*it)->value.c_str());
+		printf("%s:%s\n", (*it)->children->at(0)->lexme.c_str(), (*it)->children->at(0)->value.c_str());
+	}
+}
+
+
 void nts::Parser::checkChipset() {
 	t_ast_node	*node;
 
 	node = (t_ast_node*)getNode(nts::ASTNodeType::SECTION, ".chipsets:", _root->children);
 	for (auto it = node->children->begin(); it < node->children->end(); it++) {
-		printf("%s %s\n", (*it)->lexme.c_str(), (*it)->value.c_str());
+		printf("%s\t%s\n", (*it)->lexme.c_str(), (*it)->value.c_str());
 	}
 }
 
@@ -55,7 +66,17 @@ void nts::Parser::createAndPushANewNode(nts::ASTNodeType section, std::string le
 	node->children->push_back(newNode);
 }
 void nts::Parser::addLinkNode(std::string word1, std::string word2) {
+	std::string		delimiter = ":";
+	std::string		pairs[2][2];
 
+	if (word1.find(delimiter) == word1.npos || word2.find(delimiter) == word2.npos)
+		Logger::log(Logger::Error, "Syntax error in the line : " + word1 + " " + word2 + "\n", true);
+	pairs[0][0] = word1.substr(0, word1.find(delimiter));
+	pairs[0][1] = word1.substr(word1.find(delimiter) + 1);
+	pairs[1][0] = word2.substr(0, word2.find(delimiter));
+	pairs[1][1] = word2.substr(word2.find(delimiter) + 1);
+	createAndPushANewNode(nts::ASTNodeType::LINK, pairs[0][0], pairs[0][1], nts::ASTNodeType::SECTION, ".links:");
+	createAndPushANewNode(nts::ASTNodeType::LINK_END, pairs[1][0], pairs[1][1], nts::ASTNodeType::LINK, pairs[0][0]);
 }
 
 void nts::Parser::addChipsetNode(std::string word1, std::string word2) {
@@ -95,7 +116,9 @@ void nts::Parser::feed(std::string const &input) {
 	getWords(input, state);
 }
 
-void nts::Parser::parseTree(nts::t_ast_node &root) {}
+void nts::Parser::parseTree(nts::t_ast_node &root) {
+
+}
 
 // TODO: Faire la fonction qui delete en deep;
 nts::t_ast_node *nts::Parser::createTree() {
