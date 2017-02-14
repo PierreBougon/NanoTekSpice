@@ -16,6 +16,7 @@ namespace nts
         public:
             Ci4004(const std::string &name);
 
+        private:
             Tristate gate(nts::Component::InputPin const *inputPin1,
                           nts::Component::InputPin const *inputPin2) const override;
         };
