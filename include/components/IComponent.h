@@ -6,6 +6,7 @@
 #define NANOTEKSPICE_ICOMPONENT_H_
 
 
+#include <string>
 #include <cstddef>
 
 namespace nts
@@ -48,6 +49,7 @@ namespace nts
         virtual nts::Tristate    gate(nts::Component::InputPin const *inputPin1,
                                       nts::Component::InputPin const *inputPin2)
         const = 0;
+        virtual const std::string   &getName() const = 0;
     };
 
 }
