@@ -5,6 +5,7 @@
 #include <components/IComponent.h>
 #include <Logger.h>
 #include <sstream>
+#include <components/ComponentCreator.h>
 #include "parser/Parser.h"
 
 nts::Parser::Parser() {
@@ -45,7 +46,6 @@ void nts::Parser::checkLinks() {
 	}
 }
 
-
 void nts::Parser::checkChipset() {
 	t_ast_node	*node;
 
@@ -65,12 +65,13 @@ void nts::Parser::createAndPushANewNode(nts::ASTNodeType section, std::string le
 	node = (t_ast_node*)getNode(sectionTarget, lexmeTarget, _root->children);
 	node->children->push_back(newNode);
 }
+
 void nts::Parser::addLinkNode(std::string word1, std::string word2) {
 	std::string		delimiter = ":";
 	std::string		pairs[2][2];
 
 	if (word1.find(delimiter) == word1.npos || word2.find(delimiter) == word2.npos)
-		Logger::log(Logger::Error, "Syntax error in the line : " + word1 + " " + word2 + "\n", true);
+		Logger::log(Logger::Error, "Syntax error in the line : " + word1 + " " + word2, true);
 	pairs[0][0] = word1.substr(0, word1.find(delimiter));
 	pairs[0][1] = word1.substr(word1.find(delimiter) + 1);
 	pairs[1][0] = word2.substr(0, word2.find(delimiter));
@@ -111,12 +112,54 @@ void nts::Parser::feed(std::string const &input) {
 		return;
 	}
 	if (state == 0) {
-		Logger::log(Logger::Level::Error, ".chipsets: must be the first non-comment line in the configuration file\n", true);
+		Logger::log(Logger::Level::Error, ".chipsets: must be the first non-comment line in the configuration file", true);
 	}
 	getWords(input, state);
 }
 
+void nts::Parser::createListOfComponents() {
+	nts::t_ast_node *childrenNode = (t_ast_node *)getNode(nts::ASTNodeType::SECTION, ".chipsets:", _root->children);
+	nts::ComponentCreator	factory;
+
+	for (std::vector<t_ast_node *>::iterator it = childrenNode->children->begin(); it < childrenNode->children->end(); it++) {
+		try {
+			printf("%s %s\n", (*it)->lexme.c_str(), (*it)->value.c_str());
+			_componentList.push_back(factory.createComponent((*it)->lexme, (*it)->value));
+		}
+		catch (std::exception e) {
+			Logger::log(Logger::Error, "A component is undefined, aborting", true);
+		}
+	}
+}
+
+nts::IComponent *nts::Parser::getItemFromList(std::string lexmeValue) {
+	for (std::vector<IComponent *>::iterator it = _componentList.begin(); it < _componentList.end(); it++) {
+		if ((*it)->getName() == lexmeValue)
+			return (*it);
+	}
+	return (nullptr);
+}
+
+void nts::Parser::linkEveryComponent() {
+	nts::t_ast_node *childrenNode = (t_ast_node *)getNode(nts::ASTNodeType::SECTION, ".links:", _root->children);
+	IComponent		*linker;
+	IComponent		*toBeLinked;
+
+	for (std::vector<t_ast_node *>::iterator it = childrenNode->children->begin(); it < childrenNode->children->end(); it++) {
+		linker = getItemFromList((*it)->lexme);
+		toBeLinked = getItemFromList((*it)->value);
+		if (!linker || !toBeLinked)
+
+		linker->SetLink(((size_t)std::stoul((*it)->value)), *toBeLinked, (size_t)std::stoul((*it)->children->at(0)->value));
+	}
+
+}
+
 void nts::Parser::parseTree(nts::t_ast_node &root) {
+
+	createListOfComponents();
+	linkEveryComponent();
+	printf("Im a separator lol \n\n");
 
 }
 
@@ -129,4 +172,8 @@ nts::t_ast_node *nts::Parser::createTree() {
 	newItem->lexme = "";
 	newItem->value = "";
 	return (newItem);
+}
+
+nts::t_ast_node *nts::Parser::getRoot() const {
+	return _root;
 }
