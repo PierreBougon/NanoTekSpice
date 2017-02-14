@@ -1,20 +1,21 @@
 //
-// Created by Pierre Bougon on 06/02/17.
+// Created by Pierre Bougon on 09/02/17.
 //
 
-#ifndef NANOTEKSPICE_C4071_H_
-#define NANOTEKSPICE_C4071_H_
+#ifndef NANOTEKSPICE_C4008_H_
+#define NANOTEKSPICE_C4008_H_
 
-#include "AComponent.h"
+
+#include <components/AComponent.h>
 
 namespace nts
 {
     namespace Component
     {
-        class C4071 : public AComponent
+        class C4008 : public AComponent
         {
         public:
-            C4071(const std::string &name);
+            C4008(const std::string &name);
 
             Tristate gate(nts::Component::InputPin const *inputPin1,
                           nts::Component::InputPin const *inputPin2) const override;
@@ -22,4 +23,5 @@ namespace nts
     }
 }
 
-#endif // !NANOTEKSPICE_C4071_H_
+
+#endif // !NANOTEKSPICE_C4008_H_

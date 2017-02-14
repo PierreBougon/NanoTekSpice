@@ -2,8 +2,25 @@
 // Created by Pierre Bougon on 03/02/17.
 //
 
-#include <Logger.h>
+#include "components/C2716.h"
+#include "utils/Logger.h"
+#include "components/Ci4004.h"
+#include "components/C4514.h"
+#include "components/C4512.h"
+#include "components/C4503.h"
+#include "components/Cmk4801.h"
+#include "components/C4094.h"
+#include "components/C4081.h"
+#include "components/C4071.h"
+#include "components/C4069.h"
+#include "components/C4040.h"
+#include "components/C4030.h"
+#include "components/C4017.h"
+#include "components/C4013.h"
+#include "components/C4011.h"
 #include "components/ComponentCreator.h"
+#include "components/C4001.h"
+#include "components/C4008.h"
 
 nts::ComponentCreator::ComponentCreator()
 {
@@ -40,85 +57,85 @@ nts::IComponent *nts::ComponentCreator::createComponent(const std::string &type,
 
 nts::IComponent *nts::ComponentCreator::create2716(const std::string &value) const
 {
-    return nullptr;
+    return new nts::Component::C2716(value);
 }
 
 nts::IComponent *nts::ComponentCreator::create4001(const std::string &value) const
 {
-    return nullptr;
+    return new nts::Component::C4001(value);
 }
 
 nts::IComponent *nts::ComponentCreator::create4008(const std::string &value) const
 {
-    return nullptr;
+    return new nts::Component::C4008(value);
 }
 
 nts::IComponent *nts::ComponentCreator::create4011(const std::string &value) const
 {
-    return nullptr;
+    return new nts::Component::C4011(value);
 }
 
 nts::IComponent *nts::ComponentCreator::create4013(const std::string &value) const
 {
-    return nullptr;
+    return new nts::Component::C4013(value);
 }
 
 nts::IComponent *nts::ComponentCreator::create4017(const std::string &value) const
 {
-    return nullptr;
+    return new nts::Component::C4017(value);
 }
 
 nts::IComponent *nts::ComponentCreator::create4030(const std::string &value) const
 {
-    return nullptr;
+    return new nts::Component::C4030(value);
 }
 
 nts::IComponent *nts::ComponentCreator::create4040(const std::string &value) const
 {
-    return nullptr;
+    return new nts::Component::C4040(value);
 }
 
 nts::IComponent *nts::ComponentCreator::create4069(const std::string &value) const
 {
-    return nullptr;
+    return new nts::Component::C4069(value);
 }
 
 nts::IComponent *nts::ComponentCreator::create4071(const std::string &value) const
 {
-    return nullptr;
+    return new nts::Component::C4071(value);
 }
 
 nts::IComponent *nts::ComponentCreator::create4081(const std::string &value) const
 {
-    return nullptr;
+    return new nts::Component::C4081(value);
 }
 
 nts::IComponent *nts::ComponentCreator::create4094(const std::string &value) const
 {
-    return nullptr;
+    return new nts::Component::C4094(value);
 }
 
 nts::IComponent *nts::ComponentCreator::create4503(const std::string &value) const
 {
-    return nullptr;
+    return new nts::Component::C4503(value);
 }
 
 nts::IComponent *nts::ComponentCreator::create4512(const std::string &value) const
 {
-    return nullptr;
+    return new nts::Component::C4512(value);
 }
 
 nts::IComponent *nts::ComponentCreator::create4514(const std::string &value) const
 {
-    return nullptr;
+    return new nts::Component::C4514(value);
 }
 
 nts::IComponent *nts::ComponentCreator::createi4004(const std::string &value) const
 {
-    return nullptr;
+    return new nts::Component::Ci4004(value);
 }
 
 nts::IComponent *nts::ComponentCreator::createmk4801(const std::string &value) const
 {
-    return nullptr;
+    return new nts::Component::Cmk4801(value);
 }

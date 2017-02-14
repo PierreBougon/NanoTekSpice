@@ -16,11 +16,30 @@ namespace nts
         class OutputPin : public APin
         {
         private:
-            InputPin inputPin1;
-            InputPin inputPin2;
-//            std::vector<APin const &> linkedPin;
+            InputPin const *inputPin1;
+            InputPin const *inputPin2;
+            Tristate computedState;
+
         public:
-//            Tristate compute() override;
+            OutputPin(const InputPin *inputPin1, const InputPin *inputPin2);
+
+            virtual ~OutputPin();
+
+            Tristate compute(IComponent const &component) override;
+
+            bool link(APin const *pin) override;
+
+            const InputPin *getInputPin1() const;
+
+            void setInputPin1(const InputPin *inputPin1);
+
+            const InputPin *getInputPin2() const;
+
+            void setInputPin2(const InputPin *inputPin2);
+
+            Tristate getState() const;
+
+            void resetCompute();
         };
     }
 }

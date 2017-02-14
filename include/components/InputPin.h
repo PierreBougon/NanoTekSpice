@@ -15,14 +15,22 @@ namespace nts
         class InputPin : public APin
         {
         private:
-            const SimpleInputPin *inputPin;
+            SimpleInputPin const *inputPin;
 
         public:
-            InputPin(SimpleInputPin *inputPin = nullptr);
+            InputPin(SimpleInputPin const *inputPin = nullptr);
 
             virtual ~InputPin();
 
-            nts::Tristate getState() const;
+            Tristate compute(IComponent const &component) override;
+
+            bool link(APin const *pin) override;
+
+            nts::Tristate getState() const override;
+
+            const SimpleInputPin *getInputPin() const;
+
+            void setInputPin(const SimpleInputPin *inputPin);
         };
     }
 }

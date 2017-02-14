@@ -15,6 +15,8 @@ namespace nts
         {
             input = 0,
             output,
+            simpleInput,
+            simpleOutput,
             UNDEFINED
         };
 
@@ -22,21 +24,20 @@ namespace nts
         {
         protected:
             PinType type;
-            nts::Tristate value;
 
         public:
-            APin(PinType type = PinType::UNDEFINED,
-                 nts::Tristate value = nts::Tristate::UNDEFINED);
+            APin() = delete;
+            APin(PinType type);
 
             virtual ~APin();
 
-//            virtual nts::Tristate compute() = 0;
+            virtual nts::Tristate compute(IComponent const &component) = 0;
+
+            virtual bool link(APin const *toLink) = 0;
+
+            virtual Tristate getState() const = 0;
 
             PinType getType() const;
-
-            Tristate getValue() const;
-
-            void setValue(Tristate value);
         };
     }
 }

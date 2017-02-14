@@ -2,7 +2,7 @@
 // Created by Pierre Bougon on 01/02/17.
 //
 #include <iostream>
-#include <Logger.h>
+#include <utils/Logger.h>
 #include <signal.h>
 #include <SignalHandler.h>
 #include "utils/FileHandler.h"

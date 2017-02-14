@@ -5,7 +5,6 @@
 #ifndef NANOTEKSPICE_SIMPLEINPUTPIN_H_
 #define NANOTEKSPICE_SIMPLEINPUTPIN_H_
 
-
 #include "APin.h"
 
 namespace nts
@@ -15,7 +14,20 @@ namespace nts
         class SimpleInputPin : public APin
         {
         private:
-            nts::Tristate sate;
+            nts::Tristate state;
+
+        public:
+            SimpleInputPin(Tristate state = nts::Tristate::UNDEFINED);
+
+            virtual ~SimpleInputPin();
+
+            Tristate compute(IComponent const &component) override;
+
+            bool link(APin const *pin) override;
+
+            Tristate getState() const;
+
+            void setState(Tristate state);
         };
     }
 }
