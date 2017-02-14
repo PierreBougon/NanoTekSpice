@@ -21,7 +21,7 @@ namespace nts
              * ## Class attributes ##
              * ----------------------*/
             std::string         name;
-            std::vector<APin>   pinList;
+            std::vector<APin *> pinList;
             int                 nbPin;
 
 
@@ -31,21 +31,21 @@ namespace nts
             virtual ~AComponent();
 
         public:
-            Tristate Compute(size_t pin_num_this) override;
+            virtual Tristate Compute(size_t pin_num_this) override;
 
-            void SetLink(size_t pin_num_this, nts::IComponent &component,
+            virtual void SetLink(size_t pin_num_this, nts::IComponent &component,
                          size_t pin_num_target) override;
 
-            void Dump(void) const override;
+            virtual void Dump(void) const override;
 
-            const std::string &getName() const;
+            virtual const std::string &getName() const;
 
-            void setName(const std::string &name);
+            virtual void setName(const std::string &name);
 
-            APin const *getPinAt(size_t pin_num_this) const;
+            virtual APin const *getPinAt(size_t pin_num_this) const;
 
         private:
-            APin *_getPinAt(size_t pin_num_this);
+            virtual APin *_getPinAt(size_t pin_num_this);
         };
     }
 }

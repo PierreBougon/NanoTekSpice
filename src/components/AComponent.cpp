@@ -11,6 +11,8 @@ nts::Component::AComponent::AComponent(const std::string &name) : name(name)
 
 nts::Component::AComponent::~AComponent()
 {
+    for (std::vector<APin *>::iterator it = pinList.begin(); it != pinList.end(); ++it)
+        delete(*it);
 }
 
 const std::string &nts::Component::AComponent::getName() const
@@ -31,8 +33,10 @@ nts::Tristate nts::Component::AComponent::Compute(size_t pin_num_this)
 void nts::Component::AComponent::SetLink(size_t pin_num_this, nts::IComponent &component,
                                          size_t pin_num_target)
 {
+    //TODO : throw better exception
     AComponent const &aComponent = static_cast<AComponent const &>(component);
-    pinList[pin_num_this].link(aComponent.getPinAt(pin_num_target));
+    if (!pinList[pin_num_this]->link(aComponent.getPinAt(pin_num_target)))
+        throw new std::exception();
 }
 
 void nts::Component::AComponent::Dump(void) const
@@ -40,7 +44,7 @@ void nts::Component::AComponent::Dump(void) const
     Logger::log(Logger::Info, "## Component: " + name + "\n");
     for (int i = 0; i < nbPin; ++i)
     {
-        switch (pinList[i].getState())
+        switch (pinList[i]->getState())
         {
             case nts::Tristate::FALSE:
                 Logger::log(Logger::Info, "Pin " + std::to_string(i) + ": FALSE");
@@ -61,10 +65,10 @@ void nts::Component::AComponent::Dump(void) const
 const nts::Component::APin
 *nts::Component::AComponent::getPinAt(size_t pin_num_this) const
 {
-    return &pinList[pin_num_this];
+    return pinList[pin_num_this];
 }
 
 nts::Component::APin *nts::Component::AComponent::_getPinAt(size_t pin_num_this)
 {
-    return &pinList[pin_num_this];
+    return pinList[pin_num_this];
 }
