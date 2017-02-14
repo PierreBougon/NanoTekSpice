@@ -2,6 +2,8 @@
 // Created by Pierre Bougon on 03/02/17.
 //
 
+#include <components/COutput.h>
+#include <components/CInput.h>
 #include "components/C2716.h"
 #include "utils/Logger.h"
 #include "components/Ci4004.h"
@@ -41,6 +43,8 @@ nts::ComponentCreator::ComponentCreator()
     creationTab["4514"] = &ComponentCreator::create4514;
     creationTab["i4004"] = &ComponentCreator::createi4004;
     creationTab["mk4801"] = &ComponentCreator::createmk4801;
+    creationTab["input"] = &ComponentCreator::createInput;
+    creationTab["output"] = &ComponentCreator::createOutput;
 }
 
 nts::IComponent *nts::ComponentCreator::createComponent(const std::string &type,
@@ -50,7 +54,7 @@ nts::IComponent *nts::ComponentCreator::createComponent(const std::string &type,
     {
         Logger::log(Logger::Warning, "ComponentCreator: Cannot create a component of "
                                              "type " + type);
-        return (nullptr);
+        throw new std::invalid_argument(type);
     }
     return (IComponent *) ((*this).*creationTab.at(type))(value);
 }
@@ -138,4 +142,14 @@ nts::IComponent *nts::ComponentCreator::createi4004(const std::string &value) co
 nts::IComponent *nts::ComponentCreator::createmk4801(const std::string &value) const
 {
     return new nts::Component::Cmk4801(value);
+}
+
+nts::IComponent *nts::ComponentCreator::createOutput(const std::string &value) const
+{
+    return new nts::Component::COutput(value);
+}
+
+nts::IComponent *nts::ComponentCreator::createInput(const std::string &value) const
+{
+    return new nts::Component::CInput(value);
 }
