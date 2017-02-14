@@ -43,6 +43,7 @@ namespace nts
         // The output won't be tested, but it may help you as a trace
         virtual void                    Dump(void) const = 0;
 
+    protected:
         // Useful to define gate used by Compute on OutputPin
         virtual nts::Tristate    gate(nts::Component::InputPin const *inputPin1,
                                       nts::Component::InputPin const *inputPin2)
