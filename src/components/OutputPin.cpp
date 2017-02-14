@@ -18,6 +18,9 @@ nts::Component::OutputPin::~OutputPin()
 
 nts::Tristate nts::Component::OutputPin::compute(IComponent const &component)
 {
+    //TODO : throw better exception
+    if (!inputPin1 || !inputPin2)
+        throw new std::bad_alloc();
     computedState = component.gate(inputPin1, inputPin2);
     return (computedState);
 }

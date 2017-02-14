@@ -22,7 +22,7 @@ nts::Tristate nts::Component::SimpleInputPin::compute(IComponent const &componen
 bool nts::Component::SimpleInputPin::link(nts::Component::APin const *pin)
 {
     (void)pin;
-    return false;
+    return true;
 }
 
 nts::Tristate nts::Component::SimpleInputPin::getState() const
