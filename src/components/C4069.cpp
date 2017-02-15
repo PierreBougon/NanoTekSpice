@@ -12,3 +12,8 @@ nts::Tristate nts::Component::C4069::gate(nts::Component::InputPin const *inputP
 {
     return UNDEFINED;
 }
+
+nts::Component::C4069::~C4069()
+{
+
+}

@@ -39,3 +39,8 @@ nts::Tristate nts::Component::C4071::gate(nts::Component::InputPin const *inputP
 
     return (nts::Tristate::FALSE);
 }
+
+nts::Component::C4071::~C4071()
+{
+
+}

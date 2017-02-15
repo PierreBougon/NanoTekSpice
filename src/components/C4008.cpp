@@ -12,3 +12,8 @@ nts::Tristate nts::Component::C4008::gate(nts::Component::InputPin const *inputP
 
 nts::Component::C4008::C4008(const std::string &name) : AComponent(name)
 {}
+
+nts::Component::C4008::~C4008()
+{
+
+}

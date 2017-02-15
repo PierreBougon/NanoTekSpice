@@ -17,3 +17,18 @@ nts::Component::CInput::gate(nts::Component::InputPin const *inputPin1,
     Logger::log(Logger::Warning, "Gate called on a non logical component");
     return (UNDEFINED);
 }
+
+void nts::Component::CInput::setState(Tristate state)
+{
+    static_cast<SimpleInputPin *>(pinList[0])->setState(state);
+}
+
+nts::Tristate nts::Component::CInput::getState() const
+{
+    return pinList[0]->getState();
+}
+
+nts::Component::CInput::~CInput()
+{
+
+}

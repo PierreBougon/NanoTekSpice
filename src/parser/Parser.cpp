@@ -2,8 +2,8 @@
 // Created by peau_c on 2/6/17.
 //
 
+#include <components/IComponent.h>
 #include <sstream>
-#include "components/IComponent.h"
 #include "components/ComponentCreator.h"
 #include "utils/Logger.h"
 #include "parser/Parser.h"

@@ -20,7 +20,13 @@ namespace nts
         public:
             CInput(const std::string &name);
 
-        private:
+            virtual ~CInput();
+
+            void            setState(Tristate state);
+
+            Tristate        getState() const;
+
+        protected:
             Tristate gate(nts::Component::InputPin const *inputPin1,
                           nts::Component::InputPin const *inputPin2) const override;
         };

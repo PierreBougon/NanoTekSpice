@@ -23,6 +23,8 @@ namespace nts
         public:
             SimpleOutputPin();
 
+            virtual ~SimpleOutputPin();
+
             Tristate compute(IComponent const &component) override;
 
             Tristate compute(IComponent const &component, size_t it);
