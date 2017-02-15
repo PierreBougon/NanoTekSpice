@@ -20,7 +20,7 @@ namespace nts {
 		void checkLinks();
 		t_ast_node *getRoot() const;
 	protected:
-		t_ast_node  			*_root;
+		t_ast_node  				*_root;
 		std::vector<IComponent *>	_componentList;
 
 		bool checkIfKeywordOrComponent(std::string toBeChecked);
