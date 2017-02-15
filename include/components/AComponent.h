@@ -44,6 +44,8 @@ namespace nts
 
             virtual APin const *getPinAt(size_t pin_num_this) const;
 
+            void onSimulationFinished() override;
+
         private:
             virtual APin *_getPinAt(size_t pin_num_this);
         };

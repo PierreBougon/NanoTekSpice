@@ -72,3 +72,6 @@ nts::Component::APin *nts::Component::AComponent::_getPinAt(size_t pin_num_this)
 {
     return pinList[pin_num_this];
 }
+
+void nts::Component::AComponent::onSimulationFinished()
+{}
