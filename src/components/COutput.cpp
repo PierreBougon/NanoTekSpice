@@ -20,3 +20,8 @@ nts::Component::COutput::gate(nts::Component::InputPin const *inputPin1,
     Logger::log(Logger::Warning, "Gate called on a non logical component");
     return (UNDEFINED);
 }
+
+nts::Component::COutput::~COutput()
+{
+
+}

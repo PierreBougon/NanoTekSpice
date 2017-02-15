@@ -16,6 +16,8 @@ namespace nts
         public:
             C4503(const std::string &name);
 
+            virtual ~C4503();
+
         private:
             Tristate gate(nts::Component::InputPin const *inputPin1,
                           nts::Component::InputPin const *inputPin2) const override;

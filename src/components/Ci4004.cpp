@@ -12,3 +12,8 @@ nts::Tristate nts::Component::Ci4004::gate(nts::Component::InputPin const *input
 {
     return UNDEFINED;
 }
+
+nts::Component::Ci4004::~Ci4004()
+{
+
+}

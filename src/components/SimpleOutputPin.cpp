@@ -36,3 +36,8 @@ nts::Tristate nts::Component::SimpleOutputPin::getState() const
 {
     return UNDEFINED;
 }
+
+nts::Component::SimpleOutputPin::~SimpleOutputPin()
+{
+
+}

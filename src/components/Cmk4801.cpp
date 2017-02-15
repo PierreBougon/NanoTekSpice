@@ -12,3 +12,8 @@ nts::Tristate nts::Component::Cmk4801::gate(nts::Component::InputPin const *inpu
 {
     return UNDEFINED;
 }
+
+nts::Component::Cmk4801::~Cmk4801()
+{
+
+}

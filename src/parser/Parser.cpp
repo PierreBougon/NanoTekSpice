@@ -2,10 +2,10 @@
 // Created by peau_c on 2/6/17.
 //
 
-#include <components/IComponent.h>
-#include <Logger.h>
 #include <sstream>
-#include <components/ComponentCreator.h>
+#include "components/IComponent.h"
+#include "utils/Logger.h"
+#include "components/ComponentCreator.h"
 #include "parser/Parser.h"
 
 nts::Parser::Parser() {

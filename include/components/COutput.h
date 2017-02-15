@@ -17,6 +17,8 @@ namespace nts
         public:
             COutput(const std::string &name);
 
+            virtual ~COutput();
+
         protected:
             Tristate gate(nts::Component::InputPin const *inputPin1,
                           nts::Component::InputPin const *inputPin2) const override;

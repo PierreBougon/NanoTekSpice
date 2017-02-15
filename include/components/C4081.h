@@ -16,6 +16,8 @@ namespace nts
         public:
             C4081(const std::string &name);
 
+            virtual ~C4081();
+
         private:
             Tristate gate(nts::Component::InputPin const *inputPin1,
                           nts::Component::InputPin const *inputPin2) const override;
