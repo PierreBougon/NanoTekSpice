@@ -7,8 +7,6 @@
 
 nts::Component::C4030::C4030(const std::string &name) : AComponent(name)
 {
-    InputPin inputPin;
-
     pinList.push_back(new InputPin());
     pinList.push_back(new InputPin());
     pinList.push_back(new OutputPin(dynamic_cast<InputPin *>(pinList[0]),
