@@ -34,33 +34,33 @@ void dump() {
 
 }
 
-void createFunctionMap(std::map<std::string, std::function<void()>> map) {
-	std::function<void()>	functorPtr = exit;
+void createFunctionMap(std::map<std::string, void (*)()> map) {
+	map["exit"] = &exit;
+	map["display"] = &display;
+	map["dump"] = &dump;
+	map["loop"] = &loop;
+	map["input"] = &input;
+	map["simulate"] = &simulate;
+}
 
-	functorPtr = exit;
-	map["exit"] = functorPtr;
-	functorPtr = display;
-	map["display"] = functorPtr;
-	functorPtr = dump;
-	map["dump"] = functorPtr;
-	functorPtr = loop;
-	map["loop"] = functorPtr;
-	functorPtr = input;
-	map["input"] = functorPtr;
-	functorPtr = simulate;
-	map["simulate"] = functorPtr;
+void setInput(std::string string, nts::Parser parser, unsigned long equalPos) {
 
+}
+
+void executeCommand(std::string input, std::map<std::string, void (*)()> map, nts::Parser parser) {
+	if (input.find("=") != input.npos) {
+		setInput(input.substr(input.find("=")), parser, input.find("="));
+	}
 }
 
 void getStandardInput(nts::Parser parser) {
 	std::string 										inputLine;
-	std::map<std::string, std::function<void()>>	functionMap;
+	std::map<std::string, void (*)()>	functionMap;
 
 	createFunctionMap(functionMap);
 	while (std::cin) {
 		getline(std::cin, inputLine);
-
-
+		executeCommand(inputLine, functionMap, parser);
 	}
 
 }
