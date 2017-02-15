@@ -151,7 +151,6 @@ void nts::Parser::linkEveryComponent() {
 		if (!linker || !toBeLinked)
 			//TODO: Changer ce message d'erreur de merde
 			Logger::log(Logger::Error, "!linker || !toBeLinked", true);
-
 		linker->SetLink(((size_t)std::stoul((*it)->value)), *toBeLinked, (size_t)std::stoul((*it)->children->at(0)->value));
 	}
 

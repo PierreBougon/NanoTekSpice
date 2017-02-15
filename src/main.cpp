@@ -1,6 +1,7 @@
 //
 // Created by Pierre Bougon on 01/02/17.
 //
+#include <map>
 #include <iostream>
 #include <utils/Logger.h>
 #include <signal.h>
@@ -9,17 +10,56 @@
 #include "parser/Parser.h"
 #include "parser/Lexer.h"
 
-void createFunctionMap(std::map<std::string, std::function> map) {
+void exit() {
+
+}
+
+void display() {
+
+}
+
+void simulate() {
+
+}
+
+void input() {
+
+}
+
+void loop() {
+
+}
+
+void dump() {
+
+}
+
+void createFunctionMap(std::map<std::string, std::function<void()>> map) {
+	std::function<void()>	functorPtr = exit;
+
+	functorPtr = exit;
+	map["exit"] = functorPtr;
+	functorPtr = display;
+	map["display"] = functorPtr;
+	functorPtr = dump;
+	map["dump"] = functorPtr;
+	functorPtr = loop;
+	map["loop"] = functorPtr;
+	functorPtr = input;
+	map["input"] = functorPtr;
+	functorPtr = simulate;
+	map["simulate"] = functorPtr;
 
 }
 
 void getStandardInput(nts::Parser parser) {
-	std::string 							inputLine;
-	std::map<std::string, std::function>	functionMap;
+	std::string 										inputLine;
+	std::map<std::string, std::function<void()>>	functionMap;
 
 	createFunctionMap(functionMap);
 	while (std::cin) {
 		getline(std::cin, inputLine);
+
 
 	}
 
