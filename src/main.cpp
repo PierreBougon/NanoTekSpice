@@ -9,7 +9,22 @@
 #include "parser/Parser.h"
 #include "parser/Lexer.h"
 
-void getStandardInput(nts::Parser parser);
+void createFunctionMap(std::map<std::string, std::function> map) {
+
+}
+
+void getStandardInput(nts::Parser parser) {
+	std::string 							inputLine;
+	std::map<std::string, std::function>	functionMap;
+
+	createFunctionMap(functionMap);
+	while (std::cin) {
+		getline(std::cin, inputLine);
+
+	}
+
+}
+
 //TODO: FAIRE LE MAKEFILE;
 int main(int ac, char **av)
 {
@@ -25,12 +40,4 @@ int main(int ac, char **av)
 	parser.parseTree(*(parser.getRoot()));
     return (0);
 }
-void getStandardInput(nts::Parser parser) {
-    std::string inputLine;
 
-    while (std::cin) {
-        getline(std::cin, inputLine);
-        std::cout << inputLine << std::endl;
-    }
-
-}

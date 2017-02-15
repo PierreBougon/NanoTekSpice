@@ -2,10 +2,10 @@
 // Created by peau_c on 2/6/17.
 //
 
+#include <components/IComponent.h>
 #include <sstream>
-#include "components/IComponent.h"
-#include "utils/Logger.h"
 #include "components/ComponentCreator.h"
+#include "utils/Logger.h"
 #include "parser/Parser.h"
 
 nts::Parser::Parser() {
@@ -104,11 +104,11 @@ void nts::Parser::feed(std::string const &input) {
 	if (input == ".chipsets:" || (input == ".links:" && state == 1)) {
 		state = (input == ".chipsets:" ? 1 : 2);
 
-		nts::t_ast_node *chipsetNode = createTree();
-		chipsetNode->type = nts::ASTNodeType::SECTION;
-		chipsetNode->lexme = input;
-		chipsetNode->value = "";
-		_root->children->push_back(chipsetNode);
+		nts::t_ast_node *targetNode = createTree();
+		targetNode->type = nts::ASTNodeType::SECTION;
+		targetNode->lexme = input;
+		targetNode->value = "";
+		_root->children->push_back(targetNode);
 		return;
 	}
 	if (state == 0) {
@@ -127,7 +127,7 @@ void nts::Parser::createListOfComponents() {
 			_componentList.push_back(factory.createComponent((*it)->lexme, (*it)->value));
 		}
 		catch (std::exception e) {
-			Logger::log(Logger::Error, "A component is undefined, aborting", true);
+			Logger::log(Logger::Error, "Component " + (*it)->lexme + " is undefined, aborting", true);
 		}
 	}
 }
@@ -149,6 +149,8 @@ void nts::Parser::linkEveryComponent() {
 		linker = getItemFromList((*it)->lexme);
 		toBeLinked = getItemFromList((*it)->value);
 		if (!linker || !toBeLinked)
+			//TODO: Changer ce message d'erreur de merde
+			Logger::log(Logger::Error, "!linker || !toBeLinked", true);
 
 		linker->SetLink(((size_t)std::stoul((*it)->value)), *toBeLinked, (size_t)std::stoul((*it)->children->at(0)->value));
 	}
