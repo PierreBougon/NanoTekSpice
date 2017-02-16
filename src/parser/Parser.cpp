@@ -37,38 +37,39 @@ void *nts::Parser::getNode(nts::ASTNodeType type, std::string string, std::vecto
 }
 
 void nts::Parser::checkLinks() {
-	t_ast_node	*node;
+	t_ast_node *node;
 
-	node = (t_ast_node*)getNode(nts::ASTNodeType::SECTION, ".links:", _root->children);
-	for (auto it = node->children->begin(); it < node->children->end(); it++) {
+	node = (t_ast_node *) getNode(nts::ASTNodeType::SECTION, ".links:", _root->children);
+	for(auto it = node->children->begin(); it < node->children->end(); it++) {
 		printf("%s:%s\t", (*it)->lexme.c_str(), (*it)->value.c_str());
 		printf("%s:%s\n", (*it)->children->at(0)->lexme.c_str(), (*it)->children->at(0)->value.c_str());
 	}
 }
 
 void nts::Parser::checkChipset() {
-	t_ast_node	*node;
+	t_ast_node *node;
 
-	node = (t_ast_node*)getNode(nts::ASTNodeType::SECTION, ".chipsets:", _root->children);
-	for (auto it = node->children->begin(); it < node->children->end(); it++) {
+	node = (t_ast_node *) getNode(nts::ASTNodeType::SECTION, ".chipsets:", _root->children);
+	for(auto it = node->children->begin(); it < node->children->end(); it++) {
 		printf("%s\t%s\n", (*it)->lexme.c_str(), (*it)->value.c_str());
 	}
 }
 
-void nts::Parser::createAndPushANewNode(nts::ASTNodeType section, std::string lexme, std::string value, nts::ASTNodeType sectionTarget, std::string lexmeTarget) {
-	t_ast_node	*node;
+void nts::Parser::createAndPushANewNode(nts::ASTNodeType section, std::string lexme, std::string value,
+										nts::ASTNodeType sectionTarget, std::string lexmeTarget) {
+	t_ast_node *node;
 	t_ast_node *newNode = createTree();
 
 	newNode->type = section;
 	newNode->lexme = lexme;
 	newNode->value = value;
-	node = (t_ast_node*)getNode(sectionTarget, lexmeTarget, _root->children);
+	node = (t_ast_node *) getNode(sectionTarget, lexmeTarget, _root->children);
 	node->children->push_back(newNode);
 }
 
 void nts::Parser::addLinkNode(std::string word1, std::string word2) {
-	std::string		delimiter = ":";
-	std::string		pairs[2][2];
+	std::string delimiter = ":";
+	std::string pairs[2][2];
 
 	if (word1.find(delimiter) == word1.npos || word2.find(delimiter) == word2.npos)
 		Logger::log(Logger::Error, "Syntax error in the line : " + word1 + " " + word2, true);
@@ -112,18 +113,19 @@ void nts::Parser::feed(std::string const &input) {
 		return;
 	}
 	if (state == 0) {
-		Logger::log(Logger::Level::Error, ".chipsets: must be the first non-comment line in the configuration file", true);
+		Logger::log(Logger::Level::Error, ".chipsets: must be the first non-comment line in the configuration file",
+					true);
 	}
 	getWords(input, state);
 }
 
 void nts::Parser::createListOfComponents() {
-	nts::t_ast_node *childrenNode = (t_ast_node *)getNode(nts::ASTNodeType::SECTION, ".chipsets:", _root->children);
-	nts::ComponentCreator	factory;
+	nts::t_ast_node *childrenNode = (t_ast_node *) getNode(nts::ASTNodeType::SECTION, ".chipsets:", _root->children);
+	nts::ComponentCreator factory;
 
-	for (std::vector<t_ast_node *>::iterator it = childrenNode->children->begin(); it < childrenNode->children->end(); it++) {
+	for(std::vector<t_ast_node *>::iterator it = childrenNode->children->begin();
+		it < childrenNode->children->end(); it++) {
 		try {
-			printf("%s %s\n", (*it)->lexme.c_str(), (*it)->value.c_str());
 			_componentList.push_back(factory.createComponent((*it)->lexme, (*it)->value));
 		}
 		catch (std::exception e) {
@@ -133,7 +135,7 @@ void nts::Parser::createListOfComponents() {
 }
 
 nts::IComponent *nts::Parser::getItemFromList(std::string lexmeValue) {
-	for (std::vector<IComponent *>::iterator it = _componentList.begin(); it < _componentList.end(); it++) {
+	for(std::vector<IComponent *>::iterator it = _componentList.begin(); it < _componentList.end(); it++) {
 		if ((*it)->getName() == lexmeValue)
 			return (*it);
 	}
@@ -141,17 +143,24 @@ nts::IComponent *nts::Parser::getItemFromList(std::string lexmeValue) {
 }
 
 void nts::Parser::linkEveryComponent() {
-	nts::t_ast_node *childrenNode = (t_ast_node *)getNode(nts::ASTNodeType::SECTION, ".links:", _root->children);
-	IComponent		*linker;
-	IComponent		*toBeLinked;
+	nts::t_ast_node *childrenNode = (t_ast_node *) getNode(nts::ASTNodeType::SECTION, ".links:", _root->children);
+	IComponent *linker;
+	IComponent *toBeLinked;
 
-	for (std::vector<t_ast_node *>::iterator it = childrenNode->children->begin(); it < childrenNode->children->end(); it++) {
+	for(std::vector<t_ast_node *>::iterator it = childrenNode->children->begin();
+		it < childrenNode->children->end(); it++) {
 		linker = getItemFromList((*it)->lexme);
-		toBeLinked = getItemFromList((*it)->value);
+		toBeLinked = getItemFromList((*it)->children->at(0)->lexme);
 		if (!linker || !toBeLinked)
 			//TODO: Changer ce message d'erreur de merde
 			Logger::log(Logger::Error, "!linker || !toBeLinked", true);
-		linker->SetLink(((size_t)std::stoul((*it)->value)), *toBeLinked, (size_t)std::stoul((*it)->children->at(0)->value));
+		try {
+			toBeLinked->SetLink(((size_t) std::stoul((*it)->children->at(0)->value) - 1), *linker, (size_t) std::stoul((*it)->value) - 1);
+		}
+		catch (std::exception e) {
+			Logger::log(Logger::Error, "On line " + (*it)->lexme + ":" + (*it)->value + " " + (*it)->children->at(0)->lexme + ":" + (*it)->children->at(0)->value,
+			true);
+		}
 	}
 
 }

@@ -12,7 +12,7 @@
 #include "parser/Lexer.h"
 
 void exit() {
-	printf("exit\n");
+	exit(0);
 }
 
 void display() {
@@ -21,10 +21,6 @@ void display() {
 
 void simulate() {
 	printf("simulate\n");
-}
-
-void input() {
-	printf("input\n");
 }
 
 void loop() {
@@ -41,23 +37,25 @@ void createFunctionMap(std::map<std::string, void (*)()> &map) {
 	map["dump"] = &dump;
 	map["loop"] = &loop;
 	map["simulate"] = &simulate;
-	map["exit"]();
 }
 
 void setInput(std::string string, nts::Parser parser, unsigned long equalPos) {
 	std::string 				componentName, value;
 	nts::Component::CInput		*getter;
-	nts::Tristate				tristate;
 	long						tmp = 0;
 
 	componentName = string.substr(0, equalPos);
+	getter = static_cast<nts::Component::CInput *>(parser.getItemFromList(componentName));
+	if (!getter) {
+		Logger::log(Logger::Warning, "Input name not found, please check the syntax", false);
+		return;
+	}
 	if ((value = string.substr(equalPos + 1)).empty()) {
 		Logger::log(Logger::Warning, "Please set a correct value for input", false);
 		return;
 	}
 	tmp = std::stol(value);
-	getter = (nts::Component::CInput *)parser.getItemFromList(componentName);
-	getter->setState((tmp > 0 ? nts::Tristate::TRUE : nts::Tristate::FALSE));
+		getter->setState((tmp > 0 ? nts::Tristate::TRUE : nts::Tristate::FALSE));
 }
 
 void executeCommand(std::string input, std::map<std::string, void (*)()> map, nts::Parser parser) {
@@ -95,10 +93,10 @@ int main(int ac, char **av)
     if (ac < 2)
         Logger::log(Logger::Error, "Usage: ./nanotekspice file [Options]");
     nts::Lexer::readFileAndArguments(av, parser);
-    getStandardInput(parser);
-    parser.checkChipset();
-    parser.checkLinks();
+	parser.checkChipset();
+	parser.checkLinks();
 	parser.parseTree(*(parser.getRoot()));
+    getStandardInput(parser);
     return (0);
 }
 
