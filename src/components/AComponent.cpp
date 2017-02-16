@@ -36,7 +36,7 @@ void nts::Component::AComponent::SetLink(size_t pin_num_this, nts::IComponent &c
     //TODO : throw better exception
     AComponent const &aComponent = static_cast<AComponent const &>(component);
     if (!pinList[pin_num_this]->link(aComponent.getPinAt(pin_num_target)))
-        throw new std::exception();
+        throw std::exception();
 }
 
 void nts::Component::AComponent::Dump(void) const
