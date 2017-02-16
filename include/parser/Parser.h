@@ -16,6 +16,9 @@ namespace nts {
 		virtual void        feed(std::string const &input);
 		virtual void        parseTree(t_ast_node &root);
 		virtual t_ast_node  *createTree();
+
+		IComponent *getItemFromList(std::string lexmeValue);
+		void *getNode(ASTNodeType type, std::string string, std::vector<s_ast_node *> *actualLeaf);
 		void checkChipset();
 		void checkLinks();
 		t_ast_node *getRoot() const;
@@ -24,14 +27,12 @@ namespace nts {
 		std::vector<IComponent *>	_componentList;
 
 		bool checkIfKeywordOrComponent(std::string toBeChecked);
-		void *getNode(ASTNodeType type, std::string string, std::vector<s_ast_node *> *actualLeaf);
 		void addChipsetNode(std::string word1, std::string word2);
 		void getWords(const std::string &input, int state);
 		void addLinkNode(std::string word1, std::string word2);
 		void createAndPushANewNode(ASTNodeType section, std::string lexme, std::string value, ASTNodeType sectionTarget, std::string lexmeTarget);
 		void createListOfComponents();
 		void linkEveryComponent();
-		IComponent *getItemFromList(std::string lexmeValue);
 	};
 }
 
