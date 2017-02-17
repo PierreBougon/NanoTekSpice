@@ -93,7 +93,6 @@ void getStandardInput(nts::Parser &parser) {
 	while (std::cin) {
 		std::cout << "> ";
 		getline(std::cin, inputLine);
-
 		if (inputLine.empty())
 			continue;
 		executeCommand(inputLine, functionMap, parser);
