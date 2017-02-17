@@ -33,12 +33,12 @@ SRC	=	src/components/AComponent.cpp 		\
 		src/components/OutputPin.cpp		\
 		src/components/SimpleInputPin.cpp	\
 		src/components/SimpleOutputPin.cpp	\
-		src/parser/Lexer.cpp			\
-		src/parser/Parser.cpp			\
-		src/utils/FileHandler.cpp		\
-		src/utils/Logger.cpp			\
-		src/utils/SignalHandler.cpp		\
-		src/main.cpp				\
+		src/parser/Lexer.cpp			    \
+		src/parser/Parser.cpp			    \
+		src/utils/FileHandler.cpp		    \
+		src/utils/Logger.cpp			    \
+		src/utils/SignalHandler.cpp		    \
+		src/main.cpp				        \
 
 NAME =      	nanotekspice
 
