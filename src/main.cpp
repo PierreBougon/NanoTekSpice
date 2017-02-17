@@ -4,12 +4,11 @@
 #include <map>
 #include <iostream>
 #include <signal.h>
-#include "SignalHandler.h"
+#include "utils/SignalHandler.h"
 #include "components/COutput.h"
 #include "utils/Logger.h"
 #include "components/CInput.h"
 #include "utils/FileHandler.h"
-#include "components/IComponent.h"
 #include "parser/Parser.h"
 #include "parser/Lexer.h"
 
