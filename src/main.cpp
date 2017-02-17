@@ -3,35 +3,41 @@
 //
 #include <map>
 #include <iostream>
-#include <utils/Logger.h>
 #include <signal.h>
 #include <SignalHandler.h>
-#include <components/CInput.h>
+#include "components/COutput.h"
+#include "utils/Logger.h"
+#include "components/CInput.h"
 #include "utils/FileHandler.h"
+#include "components/IComponent.h"
 #include "parser/Parser.h"
 #include "parser/Lexer.h"
 
-void exit() {
+void exit(nts::Parser parser) {
 	exit(0);
 }
 
-void display() {
-	printf("display\n");
+void display(nts::Parser parser) {
+	for (std::vector<nts::IComponent*>::iterator it = parser.getComponentList().begin(); it < parser.getComponentList().end(); it++) {
+		if (dynamic_cast<nts::Component::COutput *> (*it) != nullptr) {
+
+		}
+	}
 }
 
-void simulate() {
+void simulate(nts::Parser parser) {
 	printf("simulate\n");
 }
 
-void loop() {
+void loop(nts::Parser parser) {
 	printf("loop\n");
 }
 
-void dump() {
+void dump(nts::Parser parser) {
 	printf("dump\n");
 }
 
-void createFunctionMap(std::map<std::string, void (*)()> &map) {
+void createFunctionMap(std::map<std::string, void (*)(nts::Parser)> &map) {
 	map["exit"] = &exit;
 	map["display"] = &display;
 	map["dump"] = &dump;
@@ -58,13 +64,13 @@ void setInput(std::string string, nts::Parser parser, unsigned long equalPos) {
 		getter->setState((tmp > 0 ? nts::Tristate::TRUE : nts::Tristate::FALSE));
 }
 
-void executeCommand(std::string input, std::map<std::string, void (*)()> map, nts::Parser parser) {
+void executeCommand(std::string input, std::map<std::string, void (*)(nts::Parser)> map, nts::Parser parser) {
 	if (input.find("=") != input.npos) {
 		setInput(input, parser, input.find("="));
 	}
 	else {
 		try {
-			map.at(input)();
+			map.at(input)(parser);
 		}
 		catch (std::out_of_range e) {
 			Logger::log(Logger::Warning, "Command \"" + input + "\" is not regocnized, check for typos", false);
@@ -74,10 +80,11 @@ void executeCommand(std::string input, std::map<std::string, void (*)()> map, nt
 
 void getStandardInput(nts::Parser parser) {
 	std::string 										inputLine;
-	std::map<std::string, void (*)()>	functionMap;
+	std::map<std::string, void (*)(nts::Parser)>	functionMap;
 
 	createFunctionMap(functionMap);
 	while (std::cin) {
+		std::cout << "> ";
 		getline(std::cin, inputLine);
 		executeCommand(inputLine, functionMap, parser);
 	}
