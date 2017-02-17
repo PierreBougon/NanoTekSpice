@@ -80,3 +80,6 @@ nts::Tristate nts::Component::AComponent::getStateAt(size_t pin_num_this) const
 {
     return getPinAt(pin_num_this)->getState();
 }
+size_t nts::Component::AComponent::getNumPin() const {
+    return (pinList.size());
+}

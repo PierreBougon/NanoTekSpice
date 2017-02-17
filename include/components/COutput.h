@@ -21,8 +21,6 @@ namespace nts
 
             void onSimulationFinished() override;
 
-            Tristate Compute(size_t pin_num_this) override;
-
         protected:
             Tristate gate(nts::Component::InputPin const *inputPin1,
                           nts::Component::InputPin const *inputPin2) const override;

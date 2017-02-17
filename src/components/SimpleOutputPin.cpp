@@ -2,6 +2,7 @@
 // Created by Pierre Bougon on 09/02/17.
 //
 
+#include <stdexcept>
 #include "components/SimpleOutputPin.h"
 
 nts::Component::SimpleOutputPin::SimpleOutputPin()
@@ -22,6 +23,8 @@ bool nts::Component::SimpleOutputPin::link(const nts::Component::APin *toLink)
 nts::Tristate nts::Component::SimpleOutputPin::compute(const nts::IComponent &component)
 {
     (void)component;
+    if (pinIt >= listOutputPin.size())
+        throw std::out_of_range("out of range");
     return listOutputPin[pinIt++]->getState();
 }
 

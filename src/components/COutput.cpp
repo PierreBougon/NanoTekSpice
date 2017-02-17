@@ -31,8 +31,3 @@ void nts::Component::COutput::onSimulationFinished()
 {
     dynamic_cast<SimpleOutputPin *>(pinList[0])->reset();
 }
-
-nts::Tristate nts::Component::COutput::Compute(size_t pin_num_this)
-{
-    return AComponent::Compute(pin_num_this);
-}

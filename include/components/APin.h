@@ -35,7 +35,7 @@ namespace nts
 
             virtual bool link(APin const *toLink) = 0;
 
-            virtual Tristate getState() const = 0;
+            virtual nts::Tristate getState() const = 0;
 
             PinType getType() const;
         };

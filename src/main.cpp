@@ -26,7 +26,25 @@ void display(nts::Parser &parser) {
 }
 
 void simulate(nts::Parser &parser) {
-	printf("simulate\n");
+	for(std::vector<nts::IComponent *>::const_iterator it = parser.getComponentList().begin(); it < parser.getComponentList().end(); ++it) {
+	  for (size_t i = 0; i < (*it)->getNumPin(); ++i) {
+		  if ((dynamic_cast<nts::Component::AComponent *>(*it))->getPinAt(i)->getType() == nts::Component::PinType::output) {
+			  (*it)->Compute(i);
+		  }
+	  }
+	}
+	for(std::vector<nts::IComponent *>::const_iterator it = parser.getComponentList().begin();
+		it < parser.getComponentList().end(); ++it) {
+		if (dynamic_cast<nts::Component::COutput *> (*it) != nullptr) {
+			while (true)
+				try {
+					(*it)->Compute();
+				}
+			catch (std::out_of_range e) {
+				break;
+			}
+		}
+	}
 }
 
 
@@ -53,7 +71,7 @@ void createFunctionMap(std::map<std::string, void (*)(nts::Parser &)> &map) {
 	map["simulate"] = &simulate;
 }
 
-void setInput(std::string string, nts::Parser parser, unsigned long equalPos) {
+void setInput(std::string string, nts::Parser &parser, unsigned long equalPos) {
 	std::string componentName, value;
 	nts::Component::CInput *getter;
 	long tmp = 0;
@@ -72,7 +90,7 @@ void setInput(std::string string, nts::Parser parser, unsigned long equalPos) {
 	getter->setState((tmp > 0 ? nts::Tristate::TRUE : nts::Tristate::FALSE));
 }
 
-void executeCommand(std::string input, std::map<std::string, void (*)(nts::Parser &)> map, nts::Parser parser) {
+void executeCommand(std::string input, std::map<std::string, void (*)(nts::Parser &)> map, nts::Parser &parser) {
 	if (input.find("=") != input.npos) {
 		setInput(input, parser, input.find("="));
 	} else {
@@ -100,6 +118,7 @@ void getStandardInput(nts::Parser &parser) {
 
 }
 
+//TODO: PARSE OPTIONS !!!
 int main(int ac, char **av) {
 	nts::Parser parser;
 	Debug::DEBUG_MODE = true;

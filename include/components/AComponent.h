@@ -31,12 +31,14 @@ namespace nts
             virtual ~AComponent();
 
         public:
-            virtual Tristate Compute(size_t pin_num_this) override;
+            virtual Tristate Compute(size_t pin_num_this = 0) override;
 
             virtual void SetLink(size_t pin_num_this, nts::IComponent &component,
                          size_t pin_num_target) override;
 
             virtual void Dump(void) const override;
+
+            size_t getNumPin() const override;
 
             virtual const std::string &getName() const;
 
