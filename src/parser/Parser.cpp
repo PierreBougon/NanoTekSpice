@@ -2,8 +2,9 @@
 // Created by peau_c on 2/6/17.
 //
 
-#include <components/IComponent.h>
 #include <sstream>
+#include "components/COutput.h"
+#include "components/IComponent.h"
 #include "components/ComponentCreator.h"
 #include "utils/Logger.h"
 #include "parser/Parser.h"
@@ -155,11 +156,19 @@ void nts::Parser::linkEveryComponent() {
 			//TODO: Changer ce message d'erreur de merde
 			Logger::log(Logger::Error, "!linker || !toBeLinked", true);
 		try {
-			toBeLinked->SetLink(((size_t) std::stoul((*it)->children->at(0)->value) - 1), *linker, (size_t) std::stoul((*it)->value) - 1);
+			if (dynamic_cast<nts::Component::COutput *> (linker) != nullptr) {
+				linker->SetLink((size_t) std::stoul((*it)->value) - 1, *toBeLinked,
+								(size_t) std::stoul((*it)->children->at(0)->value) - 1);
+			} else {
+				toBeLinked->SetLink(((size_t) std::stoul((*it)->children->at(0)->value) - 1), *linker,
+									(size_t) std::stoul((*it)->value) - 1);
+			}
 		}
 		catch (std::exception e) {
-			Logger::log(Logger::Error, "On line " + (*it)->lexme + ":" + (*it)->value + " " + (*it)->children->at(0)->lexme + ":" + (*it)->children->at(0)->value,
-			true);
+			Logger::log(Logger::Error,
+						"On line " + (*it)->lexme + ":" + (*it)->value + " " + (*it)->children->at(0)->lexme + ":" +
+						(*it)->children->at(0)->value + ", linkage of a pin that dosn't exists.",
+						true);
 		}
 	}
 
@@ -186,4 +195,8 @@ nts::t_ast_node *nts::Parser::createTree() {
 
 nts::t_ast_node *nts::Parser::getRoot() const {
 	return _root;
+}
+
+std::vector<nts::IComponent *> &nts::Parser::getComponentList() const {
+	return _componentList;
 }
