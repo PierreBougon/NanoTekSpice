@@ -85,7 +85,7 @@ void executeCommand(std::string input, std::map<std::string, void (*)(nts::Parse
 	}
 }
 
-void getStandardInput(nts::Parser parser) {
+void getStandardInput(nts::Parser &parser) {
 	std::string inputLine;
 	std::map<std::string, void (*)(nts::Parser &)> functionMap;
 
@@ -100,9 +100,8 @@ void getStandardInput(nts::Parser parser) {
 
 }
 
-//TODO: FAIRE LE MAKEFILE;
 int main(int ac, char **av) {
-	nts::Parser parser = nts::Parser();
+	nts::Parser parser;
 	Debug::DEBUG_MODE = true;
 	signal(SIGINT, &SignalHandler::sigHandlerInt);
 	if (ac < 2)

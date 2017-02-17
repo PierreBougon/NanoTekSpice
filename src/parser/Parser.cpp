@@ -13,7 +13,21 @@ nts::Parser::Parser() {
 	_root->children = new std::vector<t_ast_node *>;
 }
 
+void *nts::Parser::deleteChildrenRecursively(std::vector<s_ast_node *> *root) {
+	for (std::vector<s_ast_node *>::iterator it = root->begin(); it > root->end(); ++it) {
+		if ((*it)) {
+			deleteChildrenRecursively((*it)->children);
+			delete (*it)->children;
+		}
+	}
+	return (nullptr);
+}
 nts::Parser::~Parser() {
+	deleteChildrenRecursively(_root->children);
+	for (std::vector<IComponent *>::iterator it = _componentList.begin(); it < _componentList.end(); ++it) {
+		delete ((*it));
+	}
+	delete(_root);
 }
 
 void *nts::Parser::getNode(nts::ASTNodeType type, std::string string, std::vector<s_ast_node *> *root) {
@@ -21,7 +35,7 @@ void *nts::Parser::getNode(nts::ASTNodeType type, std::string string, std::vecto
 
 	if (!root)
 		return (nullptr);
-	for(std::vector<s_ast_node *>::iterator it = root->begin(); it < root->end(); it++) {
+	for(std::vector<s_ast_node *>::iterator it = root->begin(); it < root->end(); ++it) {
 		if ((node = (t_ast_node *) getNode(type, string, (*it)->children)))
 			break;
 		if ((*it)->type == type && (*it)->lexme == string) {
@@ -176,7 +190,6 @@ void nts::Parser::parseTree(nts::t_ast_node &root) {
 
 }
 
-// TODO: Faire la fonction qui delete en deep;
 nts::t_ast_node *nts::Parser::createTree() {
 	nts::t_ast_node *newItem = new nts::t_ast_node(nullptr);
 
