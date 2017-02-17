@@ -5,6 +5,7 @@
 #ifndef NANOTEKSPICE_SIGNALHANDLER_H_
 #define NANOTEKSPICE_SIGNALHANDLER_H_
 
+extern int g_interuptLoop;
 
 class SignalHandler
 {
