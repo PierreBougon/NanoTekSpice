@@ -2,7 +2,8 @@
 // Created by Pierre Bougon on 06/02/17.
 //
 
-#include <components/OutputPin.h>
+#include "components/OutputPin.h"
+#include "components/Gates.h"
 #include "components/C4071.h"
 
 nts::Component::C4071::C4071(const std::string &name) : AComponent(name)
@@ -30,17 +31,7 @@ nts::Component::C4071::C4071(const std::string &name) : AComponent(name)
 nts::Tristate nts::Component::C4071::gate(nts::Component::InputPin const *inputPin1,
                                           nts::Component::InputPin const *inputPin2) const
 {
-    if (inputPin1->getState() == nts::Tristate::TRUE)
-        return (nts::Tristate::TRUE);
-
-    if (inputPin1->getState() == nts::Tristate::UNDEFINED
-        || inputPin2->getState() == nts::Tristate::UNDEFINED)
-        return (nts::Tristate::UNDEFINED);
-
-    if (inputPin2->getState() == nts::Tristate::TRUE)
-        return (nts::Tristate::TRUE);
-
-    return (nts::Tristate::FALSE);
+    return Gate::orGate(inputPin1->getState(), inputPin2->getState());
 }
 
 nts::Component::C4071::~C4071()
