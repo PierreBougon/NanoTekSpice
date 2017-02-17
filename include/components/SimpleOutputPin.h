@@ -20,6 +20,8 @@ namespace nts
             std::vector<OutputPin const *> listOutputPin;
 
             size_t pinIt;
+
+            Tristate state;
         public:
             SimpleOutputPin();
 

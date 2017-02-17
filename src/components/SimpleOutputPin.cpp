@@ -5,7 +5,7 @@
 #include "components/SimpleOutputPin.h"
 
 nts::Component::SimpleOutputPin::SimpleOutputPin()
-        : APin(nts::Component::PinType::simpleOutput), pinIt(0)
+        : APin(nts::Component::PinType::simpleOutput), pinIt(0), state(UNDEFINED)
 {}
 
 bool nts::Component::SimpleOutputPin::link(const nts::Component::APin *toLink)
@@ -22,14 +22,16 @@ bool nts::Component::SimpleOutputPin::link(const nts::Component::APin *toLink)
 nts::Tristate nts::Component::SimpleOutputPin::compute(const nts::IComponent &component)
 {
     (void)component;
-    return listOutputPin[pinIt++]->getState();
+    state = listOutputPin[pinIt++]->getState();
+    return state;
 }
 
 nts::Tristate
 nts::Component::SimpleOutputPin::compute(const nts::IComponent &component, size_t it)
 {
     (void)component;
-    return listOutputPin[it]->getState();
+    state = listOutputPin[it]->getState();
+    return state;
 }
 
 nts::Tristate nts::Component::SimpleOutputPin::getState() const
