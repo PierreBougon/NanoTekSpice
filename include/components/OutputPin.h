@@ -18,9 +18,10 @@ namespace nts
         private:
             InputPin const *inputPin1;
             InputPin const *inputPin2;
+        protected:
             Tristate computedState;
 
-        public:
+         public:
             OutputPin(const InputPin *inputPin1, const InputPin *inputPin2);
 
             virtual ~OutputPin();

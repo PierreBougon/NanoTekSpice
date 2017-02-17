@@ -2,7 +2,8 @@
 // Created by Pierre Bougon on 06/02/17.
 //
 
-#include <components/OutputPin.h>
+#include "components/OutputPin.h"
+#include "components/Gates.h"
 #include "components/C4030.h"
 
 nts::Component::C4030::C4030(const std::string &name) : AComponent(name)
@@ -30,12 +31,7 @@ nts::Component::C4030::C4030(const std::string &name) : AComponent(name)
 nts::Tristate nts::Component::C4030::gate(nts::Component::InputPin const *inputPin1,
                                           nts::Component::InputPin const *inputPin2) const
 {
-    if (inputPin1->getState() == UNDEFINED || inputPin2->getState() == UNDEFINED)
-        return UNDEFINED;
-    if ((inputPin1->getState() == TRUE && inputPin2->getState() == FALSE)
-            || (inputPin1->getState() == FALSE && inputPin2->getState() == TRUE))
-        return TRUE;
-    return FALSE;
+    return nts::Gate::xorGate(inputPin1->getState(), inputPin2->getState());
 }
 
 nts::Component::C4030::~C4030()

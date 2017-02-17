@@ -3,6 +3,7 @@
 //
 
 #include <components/OutputPin.h>
+#include <components/Gates.h>
 #include "components/C4001.h"
 
 nts::Component::C4001::C4001(const std::string &name) : AComponent(name)
@@ -30,11 +31,7 @@ nts::Component::C4001::C4001(const std::string &name) : AComponent(name)
 nts::Tristate nts::Component::C4001::gate(nts::Component::InputPin const *inputPin1,
                                           nts::Component::InputPin const *inputPin2) const
 {
-    if (inputPin1->getState() == UNDEFINED || inputPin2->getState() == UNDEFINED)
-        return UNDEFINED;
-    if (inputPin1->getState() == FALSE && inputPin2->getState() == FALSE)
-        return TRUE;
-    return FALSE;
+    return Gate::norGate(inputPin1->getState(), inputPin2->getState());
 }
 
 nts::Component::C4001::~C4001()

@@ -48,7 +48,7 @@ namespace nts
 
             Tristate getStateAt(size_t pin_num_this) const;
 
-        private:
+        protected:
             virtual APin *_getPinAt(size_t pin_num_this);
         };
     }

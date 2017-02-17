@@ -4,6 +4,7 @@
 
 #include <components/InputPin.h>
 #include <components/OutputPin.h>
+#include <components/Gates.h>
 #include "components/C4081.h"
 
 nts::Component::C4081::C4081(const std::string &name) : AComponent(name)
@@ -32,18 +33,7 @@ nts::Component::C4081::C4081(const std::string &name) : AComponent(name)
 nts::Tristate nts::Component::C4081::gate(nts::Component::InputPin const *inputPin1,
                                           nts::Component::InputPin const *inputPin2) const
 {
-    if (inputPin1->getState() == nts::Tristate::FALSE)
-        return (nts::Tristate::FALSE);
-
-    if (inputPin1->getState() == nts::Tristate::UNDEFINED
-        || inputPin2->getState() == nts::Tristate::UNDEFINED)
-        return (nts::Tristate::UNDEFINED);
-
-    if (inputPin1->getState() == nts::Tristate::TRUE
-        && inputPin2->getState() == nts::Tristate::TRUE)
-        return (nts::Tristate::TRUE);
-
-    return (nts::Tristate::FALSE);
+    return Gate::andGate(inputPin1->getState(), inputPin2->getState());
 }
 
 nts::Component::C4081::~C4081()
