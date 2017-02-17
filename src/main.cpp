@@ -4,7 +4,7 @@
 #include <map>
 #include <iostream>
 #include <signal.h>
-#include <SignalHandler.h>
+#include "SignalHandler.h"
 #include "components/COutput.h"
 #include "utils/Logger.h"
 #include "components/CInput.h"
@@ -13,31 +13,40 @@
 #include "parser/Parser.h"
 #include "parser/Lexer.h"
 
-void exit(nts::Parser parser) {
+void exit(nts::Parser &parser) {
 	exit(0);
 }
 
-void display(nts::Parser parser) {
-	for (std::vector<nts::IComponent*>::iterator it = parser.getComponentList().begin(); it < parser.getComponentList().end(); it++) {
+void display(nts::Parser &parser) {
+	for(std::vector<nts::IComponent *>::const_iterator it = parser.getComponentList().begin();
+		it < parser.getComponentList().end(); ++it) {
 		if (dynamic_cast<nts::Component::COutput *> (*it) != nullptr) {
-
+			std::cout << (*it)->getName() << "=" << (*it)->getStateAt() << std::endl;
 		}
 	}
 }
 
-void simulate(nts::Parser parser) {
+void simulate(nts::Parser &parser) {
 	printf("simulate\n");
 }
 
-void loop(nts::Parser parser) {
-	printf("loop\n");
+
+
+void loop(nts::Parser &parser) {
+	signal(SIGINT, SignalHandler::sigHandlerInt);
+	while (!g_interuptLoop) {
+	 	simulate(parser);
+	}
+	g_interuptLoop = 0;
 }
 
-void dump(nts::Parser parser) {
-	printf("dump\n");
+void dump(nts::Parser &parser) {
+	for(std::vector<nts::IComponent *>::const_iterator it = parser.getComponentList().begin();
+		it < parser.getComponentList().end(); ++it)
+		(*it)->Dump();
 }
 
-void createFunctionMap(std::map<std::string, void (*)(nts::Parser)> &map) {
+void createFunctionMap(std::map<std::string, void (*)(nts::Parser &)> &map) {
 	map["exit"] = &exit;
 	map["display"] = &display;
 	map["dump"] = &dump;
@@ -46,9 +55,9 @@ void createFunctionMap(std::map<std::string, void (*)(nts::Parser)> &map) {
 }
 
 void setInput(std::string string, nts::Parser parser, unsigned long equalPos) {
-	std::string 				componentName, value;
-	nts::Component::CInput		*getter;
-	long						tmp = 0;
+	std::string componentName, value;
+	nts::Component::CInput *getter;
+	long tmp = 0;
 
 	componentName = string.substr(0, equalPos);
 	getter = static_cast<nts::Component::CInput *>(parser.getItemFromList(componentName));
@@ -61,14 +70,13 @@ void setInput(std::string string, nts::Parser parser, unsigned long equalPos) {
 		return;
 	}
 	tmp = std::stol(value);
-		getter->setState((tmp > 0 ? nts::Tristate::TRUE : nts::Tristate::FALSE));
+	getter->setState((tmp > 0 ? nts::Tristate::TRUE : nts::Tristate::FALSE));
 }
 
-void executeCommand(std::string input, std::map<std::string, void (*)(nts::Parser)> map, nts::Parser parser) {
+void executeCommand(std::string input, std::map<std::string, void (*)(nts::Parser &)> map, nts::Parser parser) {
 	if (input.find("=") != input.npos) {
 		setInput(input, parser, input.find("="));
-	}
-	else {
+	} else {
 		try {
 			map.at(input)(parser);
 		}
@@ -79,31 +87,32 @@ void executeCommand(std::string input, std::map<std::string, void (*)(nts::Parse
 }
 
 void getStandardInput(nts::Parser parser) {
-	std::string 										inputLine;
-	std::map<std::string, void (*)(nts::Parser)>	functionMap;
+	std::string inputLine;
+	std::map<std::string, void (*)(nts::Parser &)> functionMap;
 
 	createFunctionMap(functionMap);
 	while (std::cin) {
 		std::cout << "> ";
 		getline(std::cin, inputLine);
+		if (inputLine.empty())
+			continue;
 		executeCommand(inputLine, functionMap, parser);
 	}
 
 }
 
 //TODO: FAIRE LE MAKEFILE;
-int main(int ac, char **av)
-{
-    nts::Parser parser = nts::Parser();
-    Debug::DEBUG_MODE = true;
-    signal(SIGINT, &SignalHandler::sigHandlerInt);
-    if (ac < 2)
-        Logger::log(Logger::Error, "Usage: ./nanotekspice file [Options]");
-    nts::Lexer::readFileAndArguments(av, parser);
+int main(int ac, char **av) {
+	nts::Parser parser = nts::Parser();
+	Debug::DEBUG_MODE = true;
+	signal(SIGINT, &SignalHandler::sigHandlerInt);
+	if (ac < 2)
+		Logger::log(Logger::Error, "Usage: ./nanotekspice file [Options]", true);
+	nts::Lexer::readFileAndArguments(av, parser);
 	parser.checkChipset();
 	parser.checkLinks();
 	parser.parseTree(*(parser.getRoot()));
-    getStandardInput(parser);
-    return (0);
+	getStandardInput(parser);
+	return (0);
 }
 

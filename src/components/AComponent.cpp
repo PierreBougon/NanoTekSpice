@@ -42,9 +42,9 @@ void nts::Component::AComponent::SetLink(size_t pin_num_this, nts::IComponent &c
 void nts::Component::AComponent::Dump(void) const
 {
     Logger::log(Logger::Info, "## Component: " + name + "\n");
-    for (int i = 0; i < nbPin; ++i)
+    for (size_t i = 0; i < pinList.size(); ++i)
     {
-        switch (pinList[i]->getState())
+        switch (getStateAt(i))
         {
             case nts::Tristate::FALSE:
                 Logger::log(Logger::Info, "Pin " + std::to_string(i) + ": FALSE");
