@@ -76,7 +76,7 @@ nts::Component::APin *nts::Component::AComponent::_getPinAt(size_t pin_num_this)
 void nts::Component::AComponent::onSimulationFinished()
 {}
 
-nts::Tristate nts::Component::AComponent::getStateAt(size_t pin_num_this)
+nts::Tristate nts::Component::AComponent::getStateAt(size_t pin_num_this) const
 {
     return getPinAt(pin_num_this)->getState();
 }

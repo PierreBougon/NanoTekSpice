@@ -51,6 +51,8 @@ namespace nts
                                       nts::Component::InputPin const *inputPin2)
         const = 0;
 
+        virtual nts::Tristate   getStateAt(size_t num_pin_this = 0) const = 0;
+
         virtual void onSimulationFinished() = 0;
     };
 
