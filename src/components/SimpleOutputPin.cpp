@@ -41,3 +41,8 @@ nts::Component::SimpleOutputPin::~SimpleOutputPin()
 {
 
 }
+
+void nts::Component::SimpleOutputPin::reset()
+{
+    this->pinIt = 0;
+}

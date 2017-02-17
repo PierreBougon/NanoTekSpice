@@ -32,6 +32,8 @@ namespace nts
             bool link(APin const *toLink) override;
 
             Tristate getState() const override;
+
+            void reset();
         };
     }
 }
