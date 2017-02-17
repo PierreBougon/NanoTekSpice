@@ -5,7 +5,6 @@
 #ifndef NANOTEKSPICE_C4008_H_
 #define NANOTEKSPICE_C4008_H_
 
-
 #include <components/AComponent.h>
 
 namespace nts
@@ -18,6 +17,13 @@ namespace nts
             C4008(const std::string &name);
 
             virtual ~C4008();
+
+            Tristate    getCarryOutState() const;
+            const APin        *getCarryOut() const;
+            APin        *getCarryOut();
+        protected:
+            Tristate    getCarryInState() const;
+            const APin        *getCarryIn() const;
 
         private:
             Tristate gate(nts::Component::InputPin const *inputPin1,
