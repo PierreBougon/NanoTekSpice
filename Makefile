@@ -42,7 +42,7 @@ NAME =      	nanotekspice
 
 INC =       	-Iinclude
 
-LFLAGS =  	-W -Wall -Wextra
+LFLAGS =  	-W -w -Wall -Wextra
 
 OBJTARGET=	$(addprefix $(OBJDIR), $(OBJ))
 
