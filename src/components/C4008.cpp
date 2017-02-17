@@ -45,7 +45,8 @@ nts::Tristate nts::Component::C4008::gate(nts::Component::InputPin const *inputP
     Tristate cout = Gate::andGate(inputPin1->getState(), inputPin2->getState());
     Tristate cout2 = Gate::andGate(sum, getCarryInState());
     sum = Gate::xorGate(sum, getCarryInState());
-    dynamic_cast<CarryOutPin *>(getCarryOut())->setState(Gate::orGate(cout, cout2));
+    dynamic_cast<CarryOutPin *>(const_cast<APin *>(getCarryOut()))->setState(
+            Gate::orGate(cout, cout2));
     return sum;
 }
 
@@ -54,17 +55,17 @@ nts::Component::C4008::~C4008()
 
 }
 
-const APin *nts::Component::C4008::getCarryIn() const
+const nts::Component::APin *nts::Component::C4008::getCarryIn() const
 {
     return getPinAt(8);
 }
 
-const APin *nts::Component::C4008::getCarryOut() const
+const nts::Component::APin *nts::Component::C4008::getCarryOut() const
 {
     return getPinAt(13);
 }
 
-nts::Component::APin *nts::Component::C4008::getCarryOut()
+nts::Component::APin *nts::Component::C4008::_getCarryOut()
 {
     return _getPinAt(13);
 }

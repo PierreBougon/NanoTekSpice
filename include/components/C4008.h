@@ -19,8 +19,8 @@ namespace nts
             virtual ~C4008();
 
             Tristate    getCarryOutState() const;
-            const APin        *getCarryOut() const;
-            APin        *getCarryOut();
+            const APin  *getCarryOut() const;
+            APin        *_getCarryOut();
         protected:
             Tristate    getCarryInState() const;
             const APin        *getCarryIn() const;
