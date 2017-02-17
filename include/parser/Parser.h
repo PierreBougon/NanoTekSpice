@@ -25,16 +25,16 @@ namespace nts {
 		const std::vector<IComponent *> &getComponentList() const;
 		t_ast_node *getRoot() const;
 
-	protected:
+	private:
 		t_ast_node  				*_root;
 		std::vector<IComponent *>	_componentList;
-	protected:
 		void addChipsetNode(std::string word1, std::string word2);
 		void getWords(const std::string &input, int state);
 		void addLinkNode(std::string word1, std::string word2);
 		void createAndPushANewNode(ASTNodeType section, std::string lexme, std::string value, ASTNodeType sectionTarget, std::string lexmeTarget);
 		void createListOfComponents();
 		void linkEveryComponent();
+		void *deleteChildrenRecursively(std::vector<s_ast_node *> *root);
 	};
 }
 
