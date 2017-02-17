@@ -4,7 +4,6 @@
 
 #include <sstream>
 #include "components/COutput.h"
-#include "components/IComponent.h"
 #include "components/ComponentCreator.h"
 #include "utils/Logger.h"
 #include "parser/Parser.h"
@@ -15,11 +14,6 @@ nts::Parser::Parser() {
 }
 
 nts::Parser::~Parser() {
-}
-
-//TODO: Check avec la liste des noms des components;
-bool nts::Parser::checkIfKeywordOrComponent(std::string toBeChecked) {
-	return (toBeChecked == "input" || toBeChecked == "output");
 }
 
 void *nts::Parser::getNode(nts::ASTNodeType type, std::string string, std::vector<s_ast_node *> *root) {
@@ -41,7 +35,7 @@ void nts::Parser::checkLinks() {
 	t_ast_node *node;
 
 	node = (t_ast_node *) getNode(nts::ASTNodeType::SECTION, ".links:", _root->children);
-	for(auto it = node->children->begin(); it < node->children->end(); it++) {
+	for(std::vector<t_ast_node *>::iterator it = node->children->begin(); it < node->children->end(); it++) {
 		printf("%s:%s\t", (*it)->lexme.c_str(), (*it)->value.c_str());
 		printf("%s:%s\n", (*it)->children->at(0)->lexme.c_str(), (*it)->children->at(0)->value.c_str());
 	}
@@ -51,7 +45,7 @@ void nts::Parser::checkChipset() {
 	t_ast_node *node;
 
 	node = (t_ast_node *) getNode(nts::ASTNodeType::SECTION, ".chipsets:", _root->children);
-	for(auto it = node->children->begin(); it < node->children->end(); it++) {
+	for(std::vector<t_ast_node *>::iterator it = node->children->begin(); it < node->children->end(); it++) {
 		printf("%s\t%s\n", (*it)->lexme.c_str(), (*it)->value.c_str());
 	}
 }
@@ -197,6 +191,6 @@ nts::t_ast_node *nts::Parser::getRoot() const {
 	return _root;
 }
 
-std::vector<nts::IComponent *> &nts::Parser::getComponentList() const {
+const std::vector<nts::IComponent *> &nts::Parser::getComponentList() const {
 	return _componentList;
 }

@@ -22,14 +22,13 @@ namespace nts {
 
 		void *getNode(ASTNodeType type, std::string string, std::vector<s_ast_node *> *actualLeaf);
 		IComponent *getItemFromList(std::string lexmeValue);
-		std::vector<IComponent *> &getComponentList() const;
+		const std::vector<IComponent *> &getComponentList() const;
 		t_ast_node *getRoot() const;
 
 	protected:
 		t_ast_node  				*_root;
 		std::vector<IComponent *>	_componentList;
 	protected:
-		bool checkIfKeywordOrComponent(std::string toBeChecked);
 		void addChipsetNode(std::string word1, std::string word2);
 		void getWords(const std::string &input, int state);
 		void addLinkNode(std::string word1, std::string word2);
