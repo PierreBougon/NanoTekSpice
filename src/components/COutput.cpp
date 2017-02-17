@@ -4,6 +4,7 @@
 
 #include <components/SimpleOutputPin.h>
 #include <utils/Logger.h>
+#include <stdexcept>
 #include "components/COutput.h"
 
 
@@ -24,4 +25,14 @@ nts::Component::COutput::gate(nts::Component::InputPin const *inputPin1,
 nts::Component::COutput::~COutput()
 {
 
+}
+
+void nts::Component::COutput::onSimulationFinished()
+{
+    dynamic_cast<SimpleOutputPin *>(pinList[0])->reset();
+}
+
+nts::Tristate nts::Component::COutput::Compute(size_t pin_num_this)
+{
+    return AComponent::Compute(pin_num_this);
 }
