@@ -28,7 +28,9 @@ nts::Tristate nts::Component::InputPin::compute(IComponent const &component)
 
 bool nts::Component::InputPin::link(nts::Component::APin const *pin)
 {
-    if (pin->getType() == nts::Component::PinType::simpleInput)
+    if (pin->getType() == nts::Component::PinType::simpleInput
+            || pin->getType() == nts::Component::PinType::output
+            || pin->getType() == nts::Component::PinType::simpleOutput)
     {
         this->inputPin = static_cast<SimpleInputPin *>(
                 const_cast<nts::Component::APin *>(pin));
