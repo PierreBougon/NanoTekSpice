@@ -45,6 +45,9 @@ void simulate(nts::Parser &parser) {
 			}
 		}
 	}
+	for (std::vector<nts::IComponent *>::const_iterator it = parser.getComponentList().begin(); it < parser.getComponentList().end(); ++it) {
+		(*it)->onSimulationFinished();
+	}
 }
 
 
@@ -118,7 +121,7 @@ void getStandardInput(nts::Parser &parser) {
 
 }
 
-//TODO: PARSE OPTIONS !!!
+//TODO: LES EXCEPTIONS !!!
 int main(int ac, char **av) {
 	nts::Parser parser;
 	Debug::DEBUG_MODE = true;
@@ -129,7 +132,9 @@ int main(int ac, char **av) {
 	parser.checkChipset();
 	parser.checkLinks();
 	parser.parseTree(*(parser.getRoot()));
+	parser.setBaseValuesFromArgument(av);
 	getStandardInput(parser);
 	return (0);
 }
+
 

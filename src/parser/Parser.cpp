@@ -2,8 +2,11 @@
 // Created by peau_c on 2/6/17.
 //
 
+#include <string>
 #include <sstream>
+#include <components/SimpleInputPin.h>
 #include "components/COutput.h"
+#include "components/CInput.h"
 #include "components/ComponentCreator.h"
 #include "utils/Logger.h"
 #include "parser/Parser.h"
@@ -206,4 +209,29 @@ nts::t_ast_node *nts::Parser::getRoot() const {
 
 const std::vector<nts::IComponent *> &nts::Parser::getComponentList() const {
 	return _componentList;
+}
+
+nts::Tristate	nts::Parser::determineTristateValue(int tristateValue) {
+	if (tristateValue == 0)
+		return (nts::Tristate::FALSE);
+	else if (tristateValue > 0)
+		return (nts::Tristate::TRUE);
+	else
+		return (nts::Tristate::UNDEFINED);
+}
+
+void nts::Parser::setBaseValuesFromArgument(char **av) {
+	std::string						string;
+	nts::IComponent					*component;
+	nts::Component::CInput			*inputPin;
+	nts::Tristate					value;
+
+	for (int i = 2; av[i]; i++) {
+		string = av[i];
+		component = getItemFromList(string.substr(0, string.find('=')));
+		(inputPin = dynamic_cast<nts::Component::CInput *>(component));
+		if (inputPin != nullptr) {
+			inputPin->setState(determineTristateValue(std::stoi(string.substr(string.find('=') + 1).c_str())));
+		}
+	}
 }
