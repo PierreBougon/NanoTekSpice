@@ -19,7 +19,6 @@ nts::Component::OutputPin::~OutputPin()
 
 nts::Tristate nts::Component::OutputPin::compute(IComponent const &component)
 {
-    //TODO: tester l'exception
     if (!inputPin1 || !inputPin2)
         throw new nts::Exception::UndefinedLinkage();
     computedState = component.gate(inputPin1, inputPin2);
