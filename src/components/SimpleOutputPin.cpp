@@ -39,7 +39,7 @@ nts::Component::SimpleOutputPin::compute(const nts::IComponent &component, size_
 
 nts::Tristate nts::Component::SimpleOutputPin::getState() const
 {
-    return UNDEFINED;
+    return state;
 }
 
 nts::Component::SimpleOutputPin::~SimpleOutputPin()
