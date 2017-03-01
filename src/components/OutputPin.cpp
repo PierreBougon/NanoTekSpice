@@ -2,6 +2,7 @@
 // Created by Pierre Bougon on 07/02/17.
 //
 
+#include "utils/UndefinedLinkage.h"
 #include "components/OutputPin.h"
 
 nts::Component::OutputPin::OutputPin(const nts::Component::InputPin *inputPin1,
@@ -18,9 +19,9 @@ nts::Component::OutputPin::~OutputPin()
 
 nts::Tristate nts::Component::OutputPin::compute(IComponent const &component)
 {
-    //TODO : throw better exception
+    //TODO: tester l'exception
     if (!inputPin1 || !inputPin2)
-        throw new std::bad_alloc();
+        throw new nts::Exception::UndefinedLinkage();
     computedState = component.gate(inputPin1, inputPin2);
     return (computedState);
 }
