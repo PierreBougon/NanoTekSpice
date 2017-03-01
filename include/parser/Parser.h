@@ -20,12 +20,12 @@ namespace nts {
 		void checkChipset();
 		void checkLinks();
 
+		void setBaseValuesFromArgument(char **av);
 		void *getNode(ASTNodeType type, std::string string, std::vector<s_ast_node *> *actualLeaf);
 		IComponent *getItemFromList(std::string lexmeValue);
 		const std::vector<IComponent *> &getComponentList() const;
 		t_ast_node *getRoot() const;
-
-	private:
+			private:
 		t_ast_node  				*_root;
 		std::vector<IComponent *>	_componentList;
 		void addChipsetNode(std::string word1, std::string word2);
@@ -35,6 +35,7 @@ namespace nts {
 		void createListOfComponents();
 		void linkEveryComponent();
 		void *deleteChildrenRecursively(std::vector<s_ast_node *> *root);
+		Tristate determineTristateValue(int trist);
 	};
 }
 
