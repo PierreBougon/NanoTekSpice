@@ -9,6 +9,7 @@
 #include "IParser.h"
 
 namespace nts {
+	//TODO:CHANGE CONSTNESS OF THIS PIECE OF SHIT
 	class Parser : public nts::IParser {
 	public:
 							Parser();
@@ -17,17 +18,22 @@ namespace nts {
 		virtual void        parseTree(t_ast_node &root);
 		virtual t_ast_node  *createTree();
 
+			//DEBUG
 		void checkChipset();
 		void checkLinks();
 
 		void setBaseValuesFromArgument(char **av);
+
+			//GETTERS
 		void *getNode(ASTNodeType type, std::string string, std::vector<s_ast_node *> *actualLeaf);
 		IComponent *getItemFromList(std::string lexmeValue);
 		const std::vector<IComponent *> &getComponentList() const;
 		t_ast_node *getRoot() const;
-			private:
+
+	private:
 		t_ast_node  				*_root;
 		std::vector<IComponent *>	_componentList;
+
 		void addChipsetNode(std::string word1, std::string word2);
 		void getWords(const std::string &input, int state);
 		void addLinkNode(std::string word1, std::string word2);
