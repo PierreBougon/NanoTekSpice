@@ -1,5 +1,3 @@
-OBJ 	=   	$(SRC:.cpp=.o)
-
 OBJDIR	=	obj
 
 SRC	=	src/components/AComponent.cpp 		\
@@ -41,6 +39,8 @@ SRC	=	src/components/AComponent.cpp 		\
 		src/exceptions/UndefinedLinkage.cpp \
 		src/main.cpp				        \
 
+OBJ 	=   	$(SRC:.cpp=.o)
+
 NAME    =      	nanotekspice
 
 LIBNAME =       libnanotekspice.a
@@ -64,7 +64,7 @@ $(NAME):    $(OBJ)
 clean:
 		rm -rf $(OBJ)
 		@rm -rf obj/
-.PHONY: fclean
+.PHONY: fclean                                                                                                                       2
 
 fclean:     	clean
 		rm -rf $(NAME)
