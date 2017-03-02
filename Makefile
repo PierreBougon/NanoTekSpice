@@ -38,6 +38,7 @@ SRC	=	src/components/AComponent.cpp 		\
 		src/utils/FileHandler.cpp		    \
 		src/utils/Logger.cpp			    \
 		src/utils/SignalHandler.cpp		    \
+		src/exceptions/UndefinedLinkage.cpp \
 		src/main.cpp				        \
 
 NAME =      	nanotekspice
