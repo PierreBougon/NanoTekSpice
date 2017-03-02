@@ -2,7 +2,7 @@
 // Created by peau_c on 3/1/17.
 //
 
-#include "utils/UndefinedLinkage.h"
+#include "exceptions/UndefinedLinkage.h"
 
 nts::Exception::UndefinedLinkage::UndefinedLinkage() throw() : std::exception() {
 
