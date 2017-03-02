@@ -1,6 +1,6 @@
 OBJ 	=   	$(SRC:.cpp=.o)
 
-OBJDIR	=	obj/
+OBJDIR	=	obj
 
 SRC	=	src/components/AComponent.cpp 		\
 		src/components/APin.cpp		    	\
@@ -41,28 +41,31 @@ SRC	=	src/components/AComponent.cpp 		\
 		src/exceptions/UndefinedLinkage.cpp \
 		src/main.cpp				        \
 
-NAME =      	nanotekspice
+NAME    =      	nanotekspice
 
-INC =       	-Iinclude
+LIBNAME =       libnanotekspice.a
 
-LFLAGS =  	-W -Wall -Wextra -g
+INC     =       -Iinclude
 
-OBJTARGET=	$(addprefix $(OBJDIR), $(OBJ))
+LFLAGS  =	-W -Wall -Wextra -fPIC
 
-all:    	$(NAME)
+all:    	$(NAME) $(LIBNAME)
 
 $(OBJ): %.o : %.cpp
-	@mkdir -p $(OBJDIR)/$(@D)
-	g++ $(LFLAGS) $(INC) -c $< -o $(OBJDIR)/$@
+	g++ $(LFLAGS) $(INC) -c $< -o $@
 
-$(NAME):    	$(OBJ)
-		g++ $(OBJTARGET) -o $(NAME) $(INC)
+$(LIBNAME): $(OBJ)
+			g++ $(OBJ) -shared -o $(LIBNAME) $(INC)
 
+$(NAME):    $(OBJ)
+			g++ $(OBJ) -o $(NAME) $(INC)
 .PHONY: clean
+
 clean:
-		rm -rf $(OBJTARGET)
+		rm -rf $(OBJ)
 		@rm -rf obj/
 .PHONY: fclean
+
 fclean:     	clean
 		rm -rf $(NAME)
 
