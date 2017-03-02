@@ -2,7 +2,7 @@
 // Created by Pierre Bougon on 07/02/17.
 //
 
-#include "utils/UndefinedLinkage.h"
+#include "exceptions/UndefinedLinkage.h"
 #include "components/OutputPin.h"
 
 nts::Component::OutputPin::OutputPin(const nts::Component::InputPin *inputPin1,
