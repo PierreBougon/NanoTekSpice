@@ -28,4 +28,6 @@ void nts::Lexer::readFileAndArguments(char **av, nts::Parser &parser) {
 
 	nts::Lexer::getFileNameAndOpenFile(av, file);
 	nts::Lexer::readFileAndBuildTree(file, parser);
+	parser.parseTree(*(parser.getRoot()));
+	parser.setBaseValuesFromArgument(av);
 }
