@@ -186,11 +186,8 @@ void nts::Parser::linkEveryComponent() {
 }
 
 void nts::Parser::parseTree(nts::t_ast_node &root) {
-
 	createListOfComponents();
 	linkEveryComponent();
-	printf("Im a separator lol \n\n");
-
 }
 
 nts::t_ast_node *nts::Parser::createTree() {
