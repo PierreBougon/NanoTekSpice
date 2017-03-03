@@ -40,7 +40,6 @@ void StandardInput::executeCommand(std::string input, std::map<std::string, void
 		setInput(input, parser, input.find("="));
 	} else {
 		try {
-			dprintf(2, "|%s|\n", input.c_str());
 			map.at(input)(parser);
 		}
 		catch (std::out_of_range e) {
