@@ -163,9 +163,9 @@ void nts::Parser::linkEveryComponent() {
 		it < childrenNode->children->end(); it++) {
 		linker = getItemFromList((*it)->lexme);
 		toBeLinked = getItemFromList((*it)->children->at(0)->lexme);
-		if (!linker || !toBeLinked)
-			//TODO: Changer ce message d'erreur de merde
-			Logger::log(Logger::Error, "!linker || !toBeLinked", true);
+		if (!linker || !toBeLinked) {
+				Logger::log(Logger::Error, "", true);
+		}
 		try {
 			if (dynamic_cast<nts::Component::COutput *> (linker) != nullptr) {
 				linker->SetLink((size_t) std::stoul((*it)->value) - 1, *toBeLinked,

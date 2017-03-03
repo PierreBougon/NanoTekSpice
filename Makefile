@@ -33,6 +33,8 @@ SRC	=	src/components/AComponent.cpp 		\
 		src/components/SimpleOutputPin.cpp	\
 		src/parser/Lexer.cpp			    \
 		src/parser/Parser.cpp			    \
+		src/parser/StandardInput.cpp        \
+		src/parser/Commands.cpp             \
 		src/utils/FileHandler.cpp		    \
 		src/utils/Logger.cpp			    \
 		src/utils/SignalHandler.cpp		    \
@@ -63,7 +65,6 @@ $(NAME):    $(OBJ)
 
 clean:
 		rm -rf $(OBJ)
-		@rm -rf obj/
 .PHONY: fclean                                                                                                                       2
 
 fclean:     	clean

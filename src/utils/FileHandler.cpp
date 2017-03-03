@@ -72,6 +72,5 @@ std::string nts::Utils::FileHandler::getValidLine() {
 
 void nts::Utils::FileHandler::setFileName(std::string name) {
 	_fileName = name;
-	printf("filename = |%s|\n", _fileName.c_str());
 	OpenFile();
 }
