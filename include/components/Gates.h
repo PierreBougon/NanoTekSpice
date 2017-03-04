@@ -19,8 +19,8 @@ namespace nts
 
         Tristate orGate(Tristate a, Tristate b);
 
-
-    }
+		Tristate nandGate(Tristate a, Tristate b);
+	}
 }
 
 #endif // !NANOTEKSPICE_GATES_H_
