@@ -5,6 +5,8 @@
 #ifndef NANOTEKSPICE_NONPINCOMPONENT_H
 #define NANOTEKSPICE_NONPINCOMPONENT_H
 
+#include <exception>
+
 namespace nts {
 	namespace Exception {
 		class NonPinComponent : public std::exception {
