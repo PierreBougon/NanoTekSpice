@@ -5,7 +5,7 @@
 #ifndef NANOTEKSPICE_C4008_H_
 #define NANOTEKSPICE_C4008_H_
 
-#include <components/AComponent.h>
+#include "components/AComponent.h"
 
 namespace nts
 {

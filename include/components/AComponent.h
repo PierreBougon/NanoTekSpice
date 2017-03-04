@@ -7,8 +7,8 @@
 
 #include <string>
 #include <vector>
-#include "IComponent.h"
-#include "APin.h"
+#include "components/pins/IComponent.h"
+#include "components/pins/APin.h"
 
 namespace nts
 {

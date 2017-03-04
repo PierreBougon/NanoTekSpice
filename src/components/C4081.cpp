@@ -2,8 +2,8 @@
 // Created by Pierre Bougon on 06/02/17.
 //
 
-#include <components/InputPin.h>
-#include <components/OutputPin.h>
+#include <components/pins/InputPin.h>
+#include <components/pins/OutputPin.h>
 #include <components/Gates.h>
 #include "components/C4081.h"
 
