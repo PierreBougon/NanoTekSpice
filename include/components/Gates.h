@@ -5,7 +5,7 @@
 #ifndef NANOTEKSPICE_GATES_H_
 #define NANOTEKSPICE_GATES_H_
 
-#include "IComponent.h"
+#include "components/pins/IComponent.h"
 
 namespace nts
 {
@@ -19,7 +19,7 @@ namespace nts
 
         Tristate orGate(Tristate a, Tristate b);
 
-
+        Tristate invertGate(Tristate a);
     }
 }
 
