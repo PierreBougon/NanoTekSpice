@@ -6,7 +6,7 @@
 #define NANOTEKSPICE_CARRYINPIN_H_
 
 
-#include "OutputPin.h"
+#include "components/pins/OutputPin.h"
 
 namespace nts
 {

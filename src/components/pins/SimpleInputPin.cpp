@@ -2,7 +2,7 @@
 // Created by Pierre Bougon on 07/02/17.
 //
 
-#include "components/SimpleInputPin.h"
+#include "components/pins/SimpleInputPin.h"
 
 nts::Component::SimpleInputPin::SimpleInputPin(nts::Tristate state)
         : APin(nts::Component::PinType::simpleInput), state(state)

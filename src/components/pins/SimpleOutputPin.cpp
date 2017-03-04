@@ -3,7 +3,7 @@
 //
 
 #include <stdexcept>
-#include "components/SimpleOutputPin.h"
+#include "components/pins/SimpleOutputPin.h"
 
 nts::Component::SimpleOutputPin::SimpleOutputPin()
         : APin(nts::Component::PinType::simpleOutput), pinIt(0), state(UNDEFINED)

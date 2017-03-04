@@ -30,7 +30,7 @@ namespace nts
     public:
         virtual ~IComponent(){};
 
-        // Compute value of the precised pin
+        // Compute value of the precised pins
         virtual nts::Tristate           Compute(size_t pin_num_this = 0) = 0;
 
         // Useful to link IComponent together
@@ -38,7 +38,7 @@ namespace nts
                                                 nts::IComponent &component, size_t
                                                 pin_num_target) = 0;
 
-        // Print on term the name of the component and the state of every pin of the
+        // Print on term the name of the component and the state of every pins of the
         // current component
         // The output won't be tested, but it may help you as a trace
         virtual void                    Dump(void) const = 0;
