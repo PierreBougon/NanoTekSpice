@@ -8,7 +8,7 @@ nts::Component::CarryOutPin::CarryOutPin(const nts::Component::InputPin *inputPi
                                          const nts::Component::InputPin *inputPin2)
         : OutputPin(inputPin1, inputPin2)
 {
-
+       computedState = FALSE;
 }
 
 void nts::Component::CarryOutPin::setState(Tristate state)

@@ -7,6 +7,7 @@
 
 
 #include "components/pins/OutputPin.h"
+#include "components/pins/VoidPin.h"
 
 namespace nts
 {
@@ -15,8 +16,8 @@ namespace nts
         class CarryOutPin : public OutputPin
         {
         public:
-            CarryOutPin(const InputPin *inputPin1 = nullptr, const InputPin *inputPin2
-            = nullptr);
+            CarryOutPin(const InputPin *inputPin1 = (InputPin *)new const VoidPin(), const InputPin *inputPin2
+            = (InputPin *)new const VoidPin());
 
             virtual ~CarryOutPin();
 
