@@ -47,7 +47,8 @@ namespace nts
         IComponent *createmk4801(const std::string &value) const;
         IComponent *createInput(const std::string &value) const;
         IComponent *createOutput(const std::string &value) const;
-    };
+		IComponent *createClock(const std::string &value) const;
+	};
 }
 
 
