@@ -135,6 +135,8 @@ void nts::Parser::createListOfComponents() {
 	nts::t_ast_node *childrenNode = (t_ast_node *) getNode(nts::ASTNodeType::SECTION, ".chipsets:", _root->children);
 	nts::ComponentCreator factory;
 
+	if (!childrenNode)
+		Logger::log(Logger::Error, "Error in creating list of components", true);
 	for(std::vector<t_ast_node *>::iterator it = childrenNode->children->begin();
 		it < childrenNode->children->end(); it++) {
 		try {
@@ -178,11 +180,21 @@ void nts::Parser::linkEveryComponent() {
 		catch (std::exception e) {
 			Logger::log(Logger::Error,
 						"On line " + (*it)->lexme + ":" + (*it)->value + " " + (*it)->children->at(0)->lexme + ":" +
-						(*it)->children->at(0)->value + ", linkage of a pin that dosn't exists.",
-						true);
+						(*it)->children->at(0)->value + ", linkage of a pin that dosn't exists.", true);
 		}
 	}
+}
 
+void nts::Parser::checkOutputs() {
+	nts::Component::COutput *output;
+
+	for(std::vector<nts::IComponent *>::const_iterator it = _componentList.begin(); it < _componentList.end(); ++it) {
+		for (size_t i = 0; i < (*it)->getNumPin(); ++i) {
+			if ((dynamic_cast<nts::Component::AComponent *>(*it))->getPinAt(i)->getType() == nts::Component::PinType::output) {
+				//output = (dynamic_cast<nts::Component::AComponent *>(*it))->getPinAt(i);
+			}
+		}
+	}
 }
 
 void nts::Parser::parseTree(nts::t_ast_node &root) {

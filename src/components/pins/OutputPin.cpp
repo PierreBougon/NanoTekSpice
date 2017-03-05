@@ -2,8 +2,8 @@
 // Created by Pierre Bougon on 07/02/17.
 //
 
+#include "components/pins/OutputPin.h"
 #include "exceptions/UndefinedLinkage.h"
-#include "components/OutputPin.h"
 
 nts::Component::OutputPin::OutputPin(const nts::Component::InputPin *inputPin1,
                                      const nts::Component::InputPin *inputPin2)

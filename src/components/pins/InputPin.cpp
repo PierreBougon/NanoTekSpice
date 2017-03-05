@@ -3,7 +3,7 @@
 //
 
 #include <typeinfo>
-#include "components/InputPin.h"
+#include "components/pins/InputPin.h"
 
 nts::Component::InputPin::InputPin(nts::Component::SimpleInputPin const *inputPin)
         : APin(nts::Component::PinType::input), inputPin(inputPin)

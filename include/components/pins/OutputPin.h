@@ -30,17 +30,17 @@ namespace nts
 
             bool link(APin const *pin) override;
 
-            const InputPin *getInputPin1() const;
+            virtual const InputPin *getInputPin1() const;
 
-            void setInputPin1(const InputPin *inputPin1);
+            virtual void setInputPin1(const InputPin *inputPin1);
 
-            const InputPin *getInputPin2() const;
+            virtual const InputPin *getInputPin2() const;
 
-            void setInputPin2(const InputPin *inputPin2);
+            virtual void setInputPin2(const InputPin *inputPin2);
 
             Tristate getState() const;
 
-            void resetCompute();
+            virtual void resetCompute();
         };
     }
 }

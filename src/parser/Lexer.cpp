@@ -4,6 +4,7 @@
 
 #include <string>
 #include "parser/Lexer.h"
+#include "parser/Commands.h"
 
 void nts::Lexer::getFileNameAndOpenFile(char **av, nts::Utils::FileHandler &file) {
 	std::string tmp;
@@ -30,4 +31,7 @@ void nts::Lexer::readFileAndArguments(char **av, nts::Parser &parser) {
 	nts::Lexer::readFileAndBuildTree(file, parser);
 	parser.parseTree(*(parser.getRoot()));
 	parser.setBaseValuesFromArgument(av);
+	Commands::simulate(parser);
+	Commands::display(parser);
+	parser.checkOutputs();
 }

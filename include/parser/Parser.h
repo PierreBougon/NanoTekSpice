@@ -22,6 +22,9 @@ namespace nts {
 		void checkChipset();
 		void checkLinks();
 
+			//ERRORGESTION
+		void checkOutputs();
+
 		void setBaseValuesFromArgument(char **av);
 
 			//GETTERS
@@ -42,7 +45,7 @@ namespace nts {
 		void linkEveryComponent();
 		void *deleteChildrenRecursively(std::vector<s_ast_node *> *root);
 		Tristate determineTristateValue(int trist);
-	};
+			};
 }
 
 #endif //NANOTEKSPICE_PARSER_H

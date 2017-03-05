@@ -2,7 +2,7 @@
 // Created by Pierre Bougon on 17/02/17.
 //
 
-#include "components/CarryOutPin.h"
+#include "components/pins/CarryOutPin.h"
 
 nts::Component::CarryOutPin::CarryOutPin(const nts::Component::InputPin *inputPin1,
                                          const nts::Component::InputPin *inputPin2)

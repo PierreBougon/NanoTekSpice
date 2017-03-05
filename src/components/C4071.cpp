@@ -3,7 +3,7 @@
 //
 
 #include "components/VoidPin.h"
-#include "components/OutputPin.h"
+#include "components/pins/OutputPin.h"
 #include "components/Gates.h"
 #include "components/C4071.h"
 

@@ -8,7 +8,7 @@
 #include <string>
 #include <map>
 #include <functional>
-#include "IComponent.h"
+#include "components/pins/IComponent.h"
 
 namespace nts
 {

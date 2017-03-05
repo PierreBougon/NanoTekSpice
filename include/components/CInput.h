@@ -7,8 +7,8 @@
 
 
 #include <string>
-#include "IComponent.h"
-#include "SimpleInputPin.h"
+#include "components/pins/IComponent.h"
+#include "components/pins/SimpleInputPin.h"
 #include "AComponent.h"
 
 namespace nts

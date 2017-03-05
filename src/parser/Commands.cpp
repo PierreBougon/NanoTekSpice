@@ -13,11 +13,20 @@ void nts::Commands::exitFunc(nts::Parser &parser) {
 	exit(0);
 }
 
+std::string getAsciiTristateValue(nts::Tristate value) {
+	if (value == nts::Tristate::FALSE)
+		return ("0");
+	else if (value == nts::Tristate::TRUE)
+		return ("1");
+	else if (value == nts::Tristate::UNDEFINED)
+		return ("U");
+}
+
 void nts::Commands::display(nts::Parser &parser) {
 	for(std::vector<nts::IComponent *>::const_iterator it = parser.getComponentList().begin();
 		it < parser.getComponentList().end(); ++it) {
 		if (dynamic_cast<nts::Component::COutput *> (*it) != nullptr) {
-			std::cout << (*it)->getName() << "=" << (*it)->getStateAt() << std::endl;
+			std::cout << (*it)->getName() << "=" + (getAsciiTristateValue((*it)->getStateAt())) << std::endl;
 		}
 	}
 }

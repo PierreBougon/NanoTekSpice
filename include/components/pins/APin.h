@@ -13,6 +13,7 @@ namespace nts
     {
         enum class PinType
         {
+            basic = -1,
             input = 0,
             output,
             simpleInput,

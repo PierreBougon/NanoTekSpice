@@ -2,7 +2,7 @@
 // Created by Pierre Bougon on 13/02/17.
 //
 
-#include <components/SimpleOutputPin.h>
+#include <components/pins/SimpleOutputPin.h>
 #include <utils/Logger.h>
 #include <stdexcept>
 #include "components/COutput.h"

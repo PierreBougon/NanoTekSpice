@@ -60,3 +60,12 @@ nts::Tristate nts::Gate::orGate(Tristate a, Tristate b)
 
     return (nts::Tristate::FALSE);
 }
+
+nts::Tristate nts::Gate::invertGate(nts::Tristate a)
+{
+    if (a == nts::Tristate::UNDEFINED)
+        return (nts::Tristate::UNDEFINED);
+    if (a == nts::Tristate::TRUE)
+        return nts::Tristate::FALSE;
+    return nts::Tristate::TRUE;
+}

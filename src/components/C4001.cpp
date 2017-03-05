@@ -2,9 +2,9 @@
 // Created by Pierre Bougon on 06/02/17.
 //
 
-#include "components/OutputPin.h"
 #include "components/Gates.h"
 #include "components/VoidPin.h"
+#include <components/pins/OutputPin.h>
 #include "components/C4001.h"
 
 nts::Component::C4001::C4001(const std::string &name) : AComponent(name)
@@ -35,7 +35,6 @@ nts::Tristate nts::Component::C4001::gate(nts::Component::InputPin const *inputP
 {
     return Gate::norGate(inputPin1->getState(), inputPin2->getState());
 }
-
 
 nts::Component::C4001::~C4001()
 {

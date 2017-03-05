@@ -16,7 +16,6 @@ namespace nts
     {
         class SimpleOutputPin : public APin
         {
-        private:
             std::vector<OutputPin const *> listOutputPin;
 
             size_t pinIt;
