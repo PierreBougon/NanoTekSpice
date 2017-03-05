@@ -13,7 +13,7 @@ nts::Tristate nts::Component::C2716::gate(nts::Component::InputPin const *inputP
 
 nts::Component::C2716::C2716(const std::string &name) : AComponent(name)
 {
-    throw new nts::Exception::NonImplemented();
+    throw new nts::Exception::NonImplemented((std::string)name);
 }
 
 nts::Component::C2716::~C2716()
