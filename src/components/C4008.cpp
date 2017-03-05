@@ -2,6 +2,7 @@
 // Created by Pierre Bougon on 09/02/17.
 //
 
+#include "components/pins/VoidPin.h"
 #include "components/pins/OutputPin.h"
 #include "components/Gates.h"
 #include "components/pins/CarryOutPin.h"
@@ -17,7 +18,7 @@ nts::Component::C4008::C4008(const std::string &name) : AComponent(name)
     pinList.push_back(new InputPin());
     pinList.push_back(new InputPin());
     //1-7
-    pinList.push_back(nullptr);
+    pinList.push_back(new VoidPin());
     //VSS 8
     pinList.push_back(new InputPin());
     //Cary IN 9
@@ -29,11 +30,12 @@ nts::Component::C4008::C4008(const std::string &name) : AComponent(name)
                                     dynamic_cast<InputPin *>(pinList[2])));
     //SUM 10-12
     APin *b4 = new InputPin();
-    pinList.push_back(new OutputPin(dynamic_cast<InputPin *>(pinList[7]),
+    pinList.push_back(new OutputPin(dynamic_cast<InputPin *>(pinList[8]),
                                     dynamic_cast<InputPin *>(b4)));
     //SUM 13
     pinList.push_back(new CarryOutPin());
     // Carry out
+
     pinList.push_back(b4);
     //15
 }
