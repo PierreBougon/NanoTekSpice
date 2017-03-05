@@ -22,6 +22,8 @@ namespace nts
             virtual ~CarryOutPin();
 
             void setState(Tristate state);
+
+            bool isCorrectlyLinked() override;
         };
     }
 }
