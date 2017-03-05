@@ -23,7 +23,7 @@ namespace nts
             APin        *_getCarryOut();
         protected:
             Tristate    getCarryInState() const;
-            const APin        *getCarryIn() const;
+            const CarryInPin        *getCarryIn() const;
 
         private:
             Tristate gate(nts::Component::InputPin const *inputPin1,

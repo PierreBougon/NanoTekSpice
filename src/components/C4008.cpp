@@ -2,10 +2,9 @@
 // Created by Pierre Bougon on 09/02/17.
 //
 
-#include "components/pins/VoidPin.h"
-#include "components/pins/OutputPin.h"
-#include "components/Gates.h"
 #include "components/pins/CarryOutPin.h"
+#include "components/pins/CarryInPin.h"
+#include "components/Gates.h"
 #include "components/C4008.h"
 
 nts::Component::C4008::C4008(const std::string &name) : AComponent(name)
@@ -20,7 +19,7 @@ nts::Component::C4008::C4008(const std::string &name) : AComponent(name)
     //1-7
     pinList.push_back(new VoidPin());
     //VSS 8
-    pinList.push_back(new InputPin());
+    pinList.push_back(new CarryInPin());
     //Cary IN 9
     pinList.push_back(new OutputPin(dynamic_cast<InputPin *>(pinList[5]),
                                     dynamic_cast<InputPin *>(pinList[6])));
@@ -49,6 +48,7 @@ nts::Tristate nts::Component::C4008::gate(nts::Component::InputPin const *inputP
     sum = Gate::xorGate(sum, getCarryInState());
     dynamic_cast<CarryOutPin *>(const_cast<APin *>(getCarryOut()))->setState(
             Gate::orGate(cout, cout2));
+    const_cast<CarryInPin *>(getCarryIn())->setState(getCarryOutState());
     return sum;
 }
 
@@ -57,9 +57,9 @@ nts::Component::C4008::~C4008()
 
 }
 
-const nts::Component::APin *nts::Component::C4008::getCarryIn() const
+const CarryInPin *nts::Component::C4008::getCarryIn() const
 {
-    return getPinAt(8);
+    return dynamic_cast<CarryInPin const *>(getPinAt(8));
 }
 
 const nts::Component::APin *nts::Component::C4008::getCarryOut() const

@@ -2,8 +2,8 @@
 // Created by Pierre Bougon on 17/02/17.
 //
 
-#ifndef NANOTEKSPICE_CARRYINPIN_H_
-#define NANOTEKSPICE_CARRYINPIN_H_
+#ifndef NANOTEKSPICE_CARRYOUTPIN_H_
+#define NANOTEKSPICE_CARRYOUTPIN_H_
 
 
 #include "components/pins/OutputPin.h"
@@ -28,5 +28,4 @@ namespace nts
     }
 }
 
-
-#endif // !NANOTEKSPICE_CARRYINPIN_H_
+#endif // !NANOTEKSPICE_CARRYOUTPIN_H_
