@@ -142,7 +142,7 @@ void nts::Parser::createListOfComponents() {
 		try {
 			_componentList.push_back(factory.createComponent((*it)->lexme, (*it)->value));
 		}
-		catch (std::exception e) {
+		catch (std::invalid_argument *e) {
 			Logger::log(Logger::Error, "Component " + (*it)->lexme + " is undefined, aborting", true);
 		}
 	}
@@ -186,8 +186,6 @@ void nts::Parser::linkEveryComponent() {
 }
 
 void nts::Parser::checkOutputs() {
-	nts::Component::COutput *output;
-
 	for(std::vector<nts::IComponent *>::const_iterator it = _componentList.begin(); it < _componentList.end(); ++it) {
 		for (size_t i = 0; i < (*it)->getNumPin(); ++i) {
 			if ((dynamic_cast<nts::Component::AComponent *>(*it))->getPinAt(i)->getType() == nts::Component::PinType::output) {
@@ -198,6 +196,7 @@ void nts::Parser::checkOutputs() {
 }
 
 void nts::Parser::parseTree(nts::t_ast_node &root) {
+	(void)(root);
 	createListOfComponents();
 	linkEveryComponent();
 }
@@ -233,7 +232,6 @@ void nts::Parser::setBaseValuesFromArgument(char **av) {
 	std::string						string;
 	nts::IComponent					*component;
 	nts::Component::CInput			*inputPin;
-	nts::Tristate					value;
 
 	for (int i = 2; av[i]; i++) {
 		string = av[i];
