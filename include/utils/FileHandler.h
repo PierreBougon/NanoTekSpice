@@ -12,8 +12,8 @@ namespace nts {
 	namespace Utils {
 		class FileHandler {
 		public:
-			FileHandler(std::string const file);
 			FileHandler();
+			FileHandler(std::string const &file);
 			~FileHandler();
 			std::string trim(const std::string str);
 			std::string getValidLine();

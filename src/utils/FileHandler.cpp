@@ -6,22 +6,18 @@
 #include "utils/Logger.h"
 #include "utils/FileHandler.h"
 
-nts::Utils::FileHandler::FileHandler() {
-	_fileName = "";
-}
-
 void nts::Utils::FileHandler::OpenFile() {
 	if (_fileName.empty()) {
 		Logger::log(Logger::Error, "The file name wasn't set before using OpenFile()\n", true);
 	}
 	_openedFile.open(_fileName, std::ios::in);
-	if (!_openedFile.good()) {
+	if (!_openedFile.is_open()) {
 		Logger::log(Logger::Error, "The file cannot be opened, check its name\n", true);
 	}
 }
 
-nts::Utils::FileHandler::FileHandler(const std::string file) {
-	_fileName = file;
+nts::Utils::FileHandler::FileHandler(const std::string &file) {
+	setFileName(file);
 }
 
 nts::Utils::FileHandler::~FileHandler() {
@@ -74,3 +70,4 @@ void nts::Utils::FileHandler::setFileName(std::string name) {
 	_fileName = name;
 	OpenFile();
 }
+nts::Utils::FileHandler::FileHandler() {}
