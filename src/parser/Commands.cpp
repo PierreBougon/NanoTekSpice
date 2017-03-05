@@ -10,6 +10,7 @@
 #include "components/COutput.h"
 
 void nts::Commands::exitFunc(nts::Parser &parser) {
+	(void)parser;
 	exit(0);
 }
 
@@ -18,8 +19,7 @@ std::string getAsciiTristateValue(nts::Tristate value) {
 		return ("0");
 	else if (value == nts::Tristate::TRUE)
 		return ("1");
-	else if (value == nts::Tristate::UNDEFINED)
-		return ("U");
+	return ("U");
 }
 
 void nts::Commands::display(nts::Parser &parser) {
