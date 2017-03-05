@@ -9,10 +9,12 @@ nts::Component::VoidPin::VoidPin() : APin(nts::Component::PinType::UNDEFINED) {}
 nts::Component::VoidPin::~VoidPin() {}
 
 nts::Tristate nts::Component::VoidPin::compute(const nts::IComponent &component) {
+	(void)component;
 	return nts::Tristate::UNDEFINED;
 }
 
 bool nts::Component::VoidPin::link(const nts::Component::APin *toLink) {
+	(void)toLink;
 	return false;
 }
 
