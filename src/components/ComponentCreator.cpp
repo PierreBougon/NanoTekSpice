@@ -2,8 +2,9 @@
 // Created by Pierre Bougon on 03/02/17.
 //
 
-#include <components/COutput.h>
-#include <components/CInput.h>
+#include "components/COutput.h"
+#include "components/CInput.h"
+#include "components/CClock.h"
 #include "components/C2716.h"
 #include "utils/Logger.h"
 #include "components/Ci4004.h"
@@ -45,6 +46,7 @@ nts::ComponentCreator::ComponentCreator()
     creationTab["mk4801"] = &ComponentCreator::createmk4801;
     creationTab["input"] = &ComponentCreator::createInput;
     creationTab["output"] = &ComponentCreator::createOutput;
+    creationTab["clock"] = &ComponentCreator::createClock;
 }
 
 nts::IComponent *nts::ComponentCreator::createComponent(const std::string &type,
@@ -152,4 +154,9 @@ nts::IComponent *nts::ComponentCreator::createOutput(const std::string &value) c
 nts::IComponent *nts::ComponentCreator::createInput(const std::string &value) const
 {
     return new nts::Component::CInput(value);
+}
+
+nts::IComponent *nts::ComponentCreator::createClock(const std::string &value) const
+{
+    return new nts::Component::CClock(value);
 }
