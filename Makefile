@@ -44,6 +44,8 @@ SRC	=	src/components/C2716.cpp	    	        \
 		src/utils/Logger.cpp			            \
 		src/utils/SignalHandler.cpp		            \
 		src/exceptions/UndefinedLinkage.cpp         \
+		src/exceptions/NonPinComponent.cpp          \
+		src/exceptions/NonImplemented.cpp           \
 		src/main.cpp				                \
 
 OBJ 	=   	$(SRC:.cpp=.o)
@@ -73,6 +75,6 @@ clean:
 .PHONY: fclean                                                                                                                       2
 
 fclean:     	clean
-		rm -rf $(NAME)
+		rm -rf $(NAME) $(LIBNAME)
 
 re:		fclean all
