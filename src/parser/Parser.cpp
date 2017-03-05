@@ -4,7 +4,7 @@
 
 #include <string>
 #include <sstream>
-#include <components/SimpleInputPin.h>
+#include <components/pins/SimpleInputPin.h>
 #include "components/COutput.h"
 #include "components/CInput.h"
 #include "components/ComponentCreator.h"

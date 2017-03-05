@@ -82,62 +82,62 @@ nts::Tristate nts::Component::C4013::Compute(size_t pin_num_this)
     return getPinAt(pin_num_this)->getState();
 }
 
-nts::Component::BasicPin *nts::Component::C4013::getData(int num) const
+nts::Component::BasicPin *nts::Component::C4013::getData(int num)
 {
     if (num == 1)
-        return dynamic_cast<BasicPin *>(getPinAt(4));
+        return dynamic_cast<BasicPin *>(_getPinAt(4));
     else if (num == 2)
-        return dynamic_cast<BasicPin *>(getPinAt(8));
+        return dynamic_cast<BasicPin *>(_getPinAt(8));
     else
         return nullptr;
 }
 
-nts::Component::BasicPin *nts::Component::C4013::getReset(int num) const
+nts::Component::BasicPin *nts::Component::C4013::getReset(int num)
 {
     if (num == 1)
-        return dynamic_cast<BasicPin *>(getPinAt(3));
+        return dynamic_cast<BasicPin *>(_getPinAt(3));
     else if (num == 2)
-        return dynamic_cast<BasicPin *>(getPinAt(9));
+        return dynamic_cast<BasicPin *>(_getPinAt(9));
     else
         return nullptr;
 }
 
-nts::Component::BasicPin *nts::Component::C4013::getSet(int num) const
+nts::Component::BasicPin *nts::Component::C4013::getSet(int num)
 {
     if (num == 1)
-        return dynamic_cast<BasicPin *>(getPinAt(5));
+        return dynamic_cast<BasicPin *>(_getPinAt(5));
     else if (num == 2)
-        return dynamic_cast<BasicPin *>(getPinAt(7));
+        return dynamic_cast<BasicPin *>(_getPinAt(7));
     else
         return nullptr;
 }
 
-nts::Component::ClockedPin *nts::Component::C4013::getClock(int num) const
+nts::Component::ClockedPin *nts::Component::C4013::getClock(int num)
 {
     if (num == 1)
-        return dynamic_cast<ClockedPin *>(getPinAt(2));
+        return dynamic_cast<ClockedPin *>(_getPinAt(2));
     else if (num == 2)
-        return dynamic_cast<ClockedPin *>(getPinAt(10));
+        return dynamic_cast<ClockedPin *>(_getPinAt(10));
     else
         return nullptr;
 }
 
-nts::Component::BasicOutputPin *nts::Component::C4013::getQ(int num) const
+nts::Component::BasicOutputPin *nts::Component::C4013::getQ(int num)
 {
     if (num == 1)
-        return dynamic_cast<BasicOutputPin *>(getPinAt(0));
+        return dynamic_cast<BasicOutputPin *>(_getPinAt(0));
     else if (num == 2)
-        return dynamic_cast<BasicOutputPin *>(getPinAt(12));
+        return dynamic_cast<BasicOutputPin *>(_getPinAt(12));
     else
         return nullptr;
 }
 
-nts::Component::BasicOutputPin *nts::Component::C4013::getQbar(int num) const
+nts::Component::BasicOutputPin *nts::Component::C4013::getQbar(int num)
 {
     if (num == 1)
-        return dynamic_cast<BasicOutputPin *>(getPinAt(1));
+        return dynamic_cast<BasicOutputPin *>(_getPinAt(1));
     else if (num == 2)
-        return dynamic_cast<BasicOutputPin *>(getPinAt(11));
+        return dynamic_cast<BasicOutputPin *>(_getPinAt(11));
     else
         return nullptr;
 }

@@ -5,7 +5,8 @@
 #ifndef NANOTEKSPICE_C4013_H_
 #define NANOTEKSPICE_C4013_H_
 
-#include <components/pins/BasicOutputPin.h>
+#include "components/pins/ClockedPin.h"
+#include "components/pins/BasicOutputPin.h"
 #include "AComponent.h"
 
 namespace nts
@@ -22,12 +23,12 @@ namespace nts
             virtual ~C4013();
 
         private:
-            BasicPin *getData(int num = 1) const;
-            BasicPin *getReset(int num = 1) const;
-            BasicPin *getSet(int num = 1) const;
-            ClockedPin *getClock(int num = 1) const;
-            BasicOutputPin *getQ(int num = 1) const;
-            BasicOutputPin *getQbar(int num = 1) const;
+            BasicPin * getData(int num = 1);
+            BasicPin *getReset(int num = 1);
+            BasicPin *getSet(int num = 1);
+            ClockedPin *getClock(int num = 1);
+            BasicOutputPin *getQ(int num = 1);
+            BasicOutputPin *getQbar(int num = 1);
 
             Tristate gate(nts::Component::InputPin const *inputPin1,
                           nts::Component::InputPin const *inputPin2) const override;

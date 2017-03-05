@@ -2,9 +2,9 @@
 // Created by Pierre Bougon on 06/02/17.
 //
 
-#include "components/VoidPin.h"
+#include "components/pins/VoidPin.h"
 #include "components/Gates.h"
-#include "components/OutputPin.h"
+#include "components/pins/OutputPin.h"
 #include "components/C4011.h"
 
 nts::Component::C4011::C4011(const std::string &name) : AComponent(name)

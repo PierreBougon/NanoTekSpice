@@ -5,9 +5,9 @@
 #ifndef NANOTEKSPICE_VOIDPIN_H
 #define NANOTEKSPICE_VOIDPIN_H
 
-#include "components/APin.h"
-#include "components/IComponent.h"
-#include "components/InputPin.h"
+#include "components/pins/APin.h"
+#include "components/pins/IComponent.h"
+#include "components/pins/InputPin.h"
 
 namespace nts {
 	namespace Component {

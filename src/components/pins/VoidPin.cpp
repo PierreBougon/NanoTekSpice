@@ -2,7 +2,7 @@
 // Created by peau_c on 3/5/17.
 //
 
-#include "components/VoidPin.h"
+#include "components/pins/VoidPin.h"
 
 nts::Component::VoidPin::VoidPin() : APin(nts::Component::PinType::UNDEFINED) {}
 

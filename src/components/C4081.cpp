@@ -2,7 +2,7 @@
 // Created by Pierre Bougon on 06/02/17.
 //
 
-#include "components/VoidPin.h"
+#include "components/pins/VoidPin.h"
 #include "components/pins/OutputPin.h"
 #include "components/Gates.h"
 #include "components/C4081.h"
