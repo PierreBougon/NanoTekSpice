@@ -23,6 +23,13 @@ nts::Tristate nts::Gate::norGate(nts::Tristate a, nts::Tristate b)
     return FALSE;
 }
 
+nts::Tristate nts::Gate::nandGate(Tristate a, Tristate b)
+{
+    if (a == nts::Tristate::TRUE && b == nts::Tristate::TRUE)
+        return (nts::Tristate::FALSE);
+    return (nts::Tristate::TRUE);
+}
+
 nts::Tristate nts::Gate::andGate(Tristate a, Tristate b)
 {
     if (a == nts::Tristate::FALSE)
