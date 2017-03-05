@@ -5,6 +5,7 @@
 #ifndef NANOTEKSPICE_C4008_H_
 #define NANOTEKSPICE_C4008_H_
 
+#include "components/pins/CarryInPin.h"
 #include "components/AComponent.h"
 
 namespace nts
@@ -23,7 +24,7 @@ namespace nts
             APin        *_getCarryOut();
         protected:
             Tristate    getCarryInState() const;
-            const CarryInPin        *getCarryIn() const;
+            const nts::Component::CarryInPin        *getCarryIn() const;
 
         private:
             Tristate gate(nts::Component::InputPin const *inputPin1,
