@@ -31,7 +31,12 @@ void StandardInput::setInput(std::string string, nts::Parser &parser, unsigned l
 		Logger::log(Logger::Warning, "Please set a correct value for input", false);
 		return;
 	}
-	tmp = std::stol(value);
+	if (value[0] == ' ') {
+		Logger::log(Logger::Warning, "No spaces allowed after '='", false);
+		return ;
+	}
+	else
+		tmp = std::stol(value);
 	CInput->setState((tmp > 0 ? nts::Tristate::TRUE : nts::Tristate::FALSE));
 }
 
