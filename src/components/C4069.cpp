@@ -2,6 +2,7 @@
 // Created by Pierre Bougon on 06/02/17.
 //
 
+#include "components/pins/VoidPin.h"
 #include "components/pins/OneEntryOutputPin.h"
 #include "components/Gates.h"
 #include "components/C4069.h"
@@ -16,7 +17,7 @@ nts::Component::C4069::C4069(const std::string &name) : AComponent(name)
     pinList.push_back(new OneEntryOutputPin(dynamic_cast<InputPin *>(pinList[2])));
     pinList.push_back(new InputPin());
     pinList.push_back(new OneEntryOutputPin(dynamic_cast<InputPin *>(pinList[4])));
-    pinList.push_back(nullptr);
+    pinList.push_back(new VoidPin());
     tmp = new InputPin();
     pinList.push_back(new OneEntryOutputPin(tmp));
     pinList.push_back(tmp);
