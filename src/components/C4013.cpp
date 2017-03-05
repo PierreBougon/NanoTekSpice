@@ -2,6 +2,7 @@
 // Created by Pierre Bougon on 06/02/17.
 //
 
+#include "components/pins/VoidPin.h"
 #include "components/pins/ClockedPin.h"
 #include "components/pins/BasicPin.h"
 #include "components/C4013.h"
@@ -14,7 +15,7 @@ nts::Component::C4013::C4013(const std::string &name) : AComponent(name)
     pinList.push_back(new BasicPin());
     pinList.push_back(new BasicPin());
     pinList.push_back(new BasicPin());
-    pinList.push_back(nullptr);
+    pinList.push_back(new VoidPin());
     pinList.push_back(new BasicPin());
     pinList.push_back(new BasicPin());
     pinList.push_back(new BasicPin());
