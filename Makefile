@@ -30,6 +30,7 @@ SRC	=	src/components/C2716.cpp	    	        \
 		src/components/pins/OutputPin.cpp	        \
 		src/components/pins/SimpleInputPin.cpp	    \
 		src/components/pins/SimpleOutputPin.cpp	    \
+		src/components/pins/CarryInPin.cpp          \
 		src/components/pins/VoidPin.cpp             \
     	src/components/pins/APin.cpp		        \
     	src/components/pins/BasicPin.cpp            \
