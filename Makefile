@@ -31,6 +31,7 @@ SRC	=	src/components/AComponent.cpp 		\
 		src/components/OutputPin.cpp		\
 		src/components/SimpleInputPin.cpp	\
 		src/components/SimpleOutputPin.cpp	\
+		src/components/VoidPin.cpp          \
 		src/parser/Lexer.cpp			    \
 		src/parser/Parser.cpp			    \
 		src/parser/StandardInput.cpp        \
