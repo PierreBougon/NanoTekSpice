@@ -27,9 +27,9 @@ namespace nts
 
             void setInputPin(const InputPin *inputPin);
 
+            bool isCorrectlyLinked() override;
+
         private:
-
-
             const InputPin *getInputPin2() const override;
 
             void setInputPin2(const InputPin *inputPin2) override;

@@ -41,6 +41,8 @@ namespace nts
             Tristate getState() const;
 
             virtual void resetCompute();
+
+            virtual bool isCorrectlyLinked();
         };
     }
 }

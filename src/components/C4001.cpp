@@ -4,7 +4,7 @@
 
 #include "components/Gates.h"
 #include "components/pins/VoidPin.h"
-#include <components/pins/OutputPin.h>
+#include "components/pins/OutputPin.h"
 #include "components/C4001.h"
 
 nts::Component::C4001::C4001(const std::string &name) : AComponent(name)

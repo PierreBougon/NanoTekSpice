@@ -68,3 +68,8 @@ nts::Tristate nts::Component::OutputPin::getState() const
 {
     return computedState;
 }
+
+bool nts::Component::OutputPin::isCorrectlyLinked()
+{
+    return inputPin1 && inputPin2;
+}

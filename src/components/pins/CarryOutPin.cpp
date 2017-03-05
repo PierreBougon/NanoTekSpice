@@ -20,3 +20,8 @@ nts::Component::CarryOutPin::~CarryOutPin()
 {
 
 }
+
+bool nts::Component::CarryOutPin::isCorrectlyLinked()
+{
+    return true;
+}

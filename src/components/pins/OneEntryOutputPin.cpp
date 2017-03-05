@@ -68,3 +68,8 @@ nts::Component::OneEntryOutputPin::setInputPin1(const nts::Component::InputPin *
 {
     OutputPin::setInputPin1(inputPin1);
 }
+
+bool nts::Component::OneEntryOutputPin::isCorrectlyLinked()
+{
+    return getInputPin() != nullptr;
+}
