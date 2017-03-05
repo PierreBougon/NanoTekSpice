@@ -18,6 +18,8 @@ nts::Tristate
 nts::Component::COutput::gate(nts::Component::InputPin const *inputPin1,
                                       nts::Component::InputPin const *inputPin2) const
 {
+    (void)inputPin1;
+    (void)inputPin2;
     Logger::log(Logger::Warning, "Gate called on a non logical component");
     return (UNDEFINED);
 }
