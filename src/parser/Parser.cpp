@@ -6,6 +6,7 @@
 #include <sstream>
 #include <components/pins/SimpleInputPin.h>
 #include "components/COutput.h"
+#include "components/pins/OutputPin.h"
 #include "components/CInput.h"
 #include "components/ComponentCreator.h"
 #include "utils/Logger.h"
@@ -186,10 +187,13 @@ void nts::Parser::linkEveryComponent() {
 }
 
 void nts::Parser::checkOutputs() {
-	for(std::vector<nts::IComponent *>::const_iterator it = _componentList.begin(); it < _componentList.end(); ++it) {
+	for(std::vector<nts::IComponent *>::iterator it = _componentList.begin(); it < _componentList.end(); ++it) {
 		for (size_t i = 0; i < (*it)->getNumPin(); ++i) {
 			if ((dynamic_cast<nts::Component::AComponent *>(*it))->getPinAt(i)->getType() == nts::Component::PinType::output) {
-				//output = (dynamic_cast<nts::Component::AComponent *>(*it))->getPinAt(i);
+				nts::Component::OutputPin *output = (nts::Component::OutputPin *)(
+						((nts::Component::AComponent *)(*it))->getPinAt(i));
+				if (!output->isCorrectlyLinked())
+					Logger::log(Logger::Error, "Please link every output before in the command line", true);
 			}
 		}
 	}
