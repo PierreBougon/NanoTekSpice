@@ -46,7 +46,7 @@ namespace nts
 
             virtual APin const *getPinAt(size_t pin_num_this) const;
 
-            void onSimulationFinished() override;
+            virtual void onSimulationFinished() override;
 
             Tristate getStateAt(size_t pin_num_this) const;
 

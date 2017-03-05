@@ -17,7 +17,7 @@ namespace nts
         public:
             CClock(const std::string &name);
 
-            void onSimulationFinished() override;
+            virtual void onSimulationFinished() override;
         };
     }
 }

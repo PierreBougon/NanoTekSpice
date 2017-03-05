@@ -48,7 +48,7 @@ nts::Tristate nts::Component::C4008::gate(nts::Component::InputPin const *inputP
     sum = Gate::xorGate(sum, getCarryInState());
     dynamic_cast<nts::Component::CarryOutPin *>(const_cast<APin *>(getCarryOut()))->setState(
             Gate::orGate(cout, cout2));
-    const_cast<nts::Component::CarryInPin *>(getCarryIn())->setState(getCarryOutState());
+    getCarryIn()->setState(getCarryOutState());
     return sum;
 }
 
@@ -57,9 +57,9 @@ nts::Component::C4008::~C4008()
 
 }
 
-const nts::Component::CarryInPin *nts::Component::C4008::getCarryIn() const
+nts::Component::CarryInPin *nts::Component::C4008::getCarryIn() const
 {
-    return dynamic_cast<CarryInPin const *>(getPinAt(8));
+    return dynamic_cast<CarryInPin *>(const_cast<APin *>(getPinAt(8)));
 }
 
 const nts::Component::APin *nts::Component::C4008::getCarryOut() const
@@ -80,4 +80,9 @@ nts::Tristate nts::Component::C4008::getCarryOutState() const
 nts::Tristate nts::Component::C4008::getCarryInState() const
 {
     return getPinAt(8)->getState();
+}
+
+void nts::Component::C4008::onSimulationFinished()
+{
+    getCarryIn()->setState(UNDEFINED);
 }

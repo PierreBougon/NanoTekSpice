@@ -25,3 +25,8 @@ bool nts::Component::CarryOutPin::isCorrectlyLinked()
 {
     return true;
 }
+
+nts::Tristate nts::Component::CarryOutPin::compute(const nts::IComponent &component)
+{
+    return getState();
+}

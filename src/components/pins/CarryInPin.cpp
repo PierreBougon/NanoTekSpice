@@ -5,7 +5,8 @@
 #include "components/pins/CarryInPin.h"
 
 nts::Component::CarryInPin::CarryInPin() : InputPin(), state(UNDEFINED)
-{}
+{
+}
 
 nts::Component::CarryInPin::~CarryInPin()
 {

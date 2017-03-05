@@ -24,6 +24,8 @@ namespace nts
             void setState(Tristate state);
 
             bool isCorrectlyLinked() override;
+
+            Tristate compute(IComponent const &component) override;
         };
     }
 }
