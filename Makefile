@@ -57,7 +57,7 @@ LIBNAME =       libnanotekspice.a
 
 INC     =       -Iinclude
 
-LFLAGS  =	-W -Wall -Wextra -fPIC
+LFLAGS  =	-W -Werror -Wall -Wextra -fPIC
 
 all:    	$(NAME) $(LIBNAME)
 
