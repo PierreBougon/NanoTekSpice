@@ -75,6 +75,6 @@ clean:
 .PHONY: fclean                                                                                                                       2
 
 fclean:     	clean
-		rm -rf $(NAME)
+		rm -rf $(NAME) $(LIBNAME)
 
 re:		fclean all
