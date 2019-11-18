@@ -1,2 +1,2 @@
 # NanoTekSpice
-Epitech NanoTekSpice project
+Epitech NanoTekSpice project consits in the simultaion of electrics components.
